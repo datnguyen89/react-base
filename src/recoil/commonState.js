@@ -9,6 +9,13 @@ export const collapsedState = atom({
   ],
 })
 
+export const isDarkModeState = atom({
+  key: 'isDarkModeState',
+  default: false,
+  effects: [
+    localStorageEffect('isDarkModeState'),
+  ],
+})
 
 export const appLoadingState = atom({
   key: 'appLoadingState',

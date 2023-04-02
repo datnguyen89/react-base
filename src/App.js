@@ -14,6 +14,7 @@ import LoginPage from './pages/LoginPage'
 import HomePage from './pages/HomePage'
 import NotFoundPage from './pages/NotFoundPage'
 import ThemeProvider from './theme/ThemeProvider'
+
 // endregion
 
 function App() {
