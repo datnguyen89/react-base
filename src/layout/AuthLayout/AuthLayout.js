@@ -1,10 +1,12 @@
 import React from 'react'
+import { Outlet } from 'react-router-dom'
+import { AuthLayoutWrapper } from './AuthLayoutStyled'
 
 const AuthLayout = () => {
   return (
-    <div>
-      
-    </div>
+    <AuthLayoutWrapper>
+      <Outlet />
+    </AuthLayoutWrapper>
   )
 }
 

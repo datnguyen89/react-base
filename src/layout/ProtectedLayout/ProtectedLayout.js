@@ -1,10 +1,12 @@
 import React from 'react'
+import { Outlet } from 'react-router-dom'
+import { ProtectedLayoutWrapper } from './ProtectedLayoutStyled'
 
 const ProtectedLayout = () => {
   return (
-    <div>
-      
-    </div>
+    <ProtectedLayoutWrapper>
+      <Outlet />
+    </ProtectedLayoutWrapper>
   )
 }
 
