@@ -2,8 +2,14 @@
 export const APP_CLIENT_ID = 5
 export const LONG_DATE = 'DD-MM-YYYY HH:mm'
 export const PAGES = {
-  LOGIN: '/login',
-  HOME: '/',
+  LOGIN: {
+    PATH: '/login',
+    NAME: 'login',
+  },
+  HOME: {
+    PATH: '/',
+    NAME: 'home',
+  },
 }
 
 export const RESPONSE_CODE = {
@@ -14,6 +20,10 @@ export const RESPONSE_CODE = {
   MERCHANT_INACTIVE: -7, // merchant không hoạt động
   REQUIRE_CONFIRM_BANK: -100303, // yêu cầu otp bank
   INVALID_OTP: -10015, // sai otp được nhập lại
+}
+
+export const THEME = {
+  PRIMARY_COLOR: '#faab31',
 }
 
 // endregion

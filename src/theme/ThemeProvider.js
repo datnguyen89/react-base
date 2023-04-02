@@ -5,6 +5,7 @@ import 'moment/locale/vi'
 import { ConfigProvider, theme } from 'antd'
 import { useRecoilValue } from 'recoil'
 import { isDarkModeState } from '../recoil/commonState'
+import { THEME } from '../constant'
 
 moment.locale('vi')
 
@@ -33,7 +34,7 @@ const ThemeProvider = props => {
       theme={{
         algorithm: isDarkMode ? darkAlgorithm : defaultAlgorithm,
         token: {
-          colorPrimary: '#faab31',
+          colorPrimary: THEME.PRIMARY_COLOR,
 
         },
       }}

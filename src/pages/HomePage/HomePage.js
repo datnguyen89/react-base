@@ -5,6 +5,7 @@ import { useQuery } from '../../hook/useQuery'
 import { Button, Card } from 'antd'
 import { useRecoilState } from 'recoil'
 import { isDarkModeState } from '../../recoil/commonState'
+import { PAGES } from '../../constant'
 
 const HomePage = props => {
   // region props, hook, state =================
@@ -21,6 +22,7 @@ const HomePage = props => {
   // region function handle logic ==============
   const handleToggleTheme = () => {
     setIsDarkMode(prev => !prev)
+    navigate(PAGES.LOGIN.PATH)
   }
   // endregion
   // region function render ====================
