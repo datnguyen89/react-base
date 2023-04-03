@@ -26,7 +26,7 @@ const LoadingOverLay = props => {
   return (
     appLoading > 0 &&
     <LoadingOverLayWrapper>
-      <Spin size={'large'} />
+      <div className="custom-spinner"></div>
     </LoadingOverLayWrapper>
   )
 }

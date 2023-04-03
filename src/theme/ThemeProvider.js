@@ -35,7 +35,25 @@ const ThemeProvider = props => {
         algorithm: isDarkMode ? darkAlgorithm : defaultAlgorithm,
         token: {
           colorPrimary: THEME.PRIMARY_COLOR,
+          borderRadius: 2,
+          colorLink: '#cfa850',
+          colorLinkHover: '#cfa850',
+          colorLinkActive: '#cfa850',
 
+        },
+        components: {
+          Radio: {
+            colorPrimary: '#cfa850',
+            colorPrimaryHover:'#cfa850',
+          },
+          Checkbox: {
+            colorPrimary: '#cfa850',
+            colorPrimaryHover:'#cfa850',
+          },
+          Button: {
+            colorPrimary: '#cfa850',
+            colorPrimaryHover:'#cfa850',
+          },
         },
       }}
     >
