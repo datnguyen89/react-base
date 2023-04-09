@@ -45,6 +45,7 @@ const LoginPage = props => {
           size={'large'}
           colon={false}
           layout={'vertical'}
+          className={'login-form'}
         >
           <Row>
             <Col span={24}>

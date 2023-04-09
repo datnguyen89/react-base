@@ -44,15 +44,19 @@ const ThemeProvider = props => {
         components: {
           Radio: {
             colorPrimary: '#cfa850',
-            colorPrimaryHover:'#cfa850',
+            colorPrimaryHover: '#cfa850',
           },
           Checkbox: {
             colorPrimary: '#cfa850',
-            colorPrimaryHover:'#cfa850',
+            colorPrimaryHover: '#cfa850',
           },
           Button: {
             colorPrimary: '#cfa850',
-            colorPrimaryHover:'#cfa850',
+            colorPrimaryHover: '#cfa850',
+          },
+          Switch: {
+            colorPrimary: '#cfa850',
+            colorPrimaryHover: '#cfa850',
           },
         },
       }}
