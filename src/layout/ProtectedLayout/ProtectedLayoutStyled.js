@@ -6,7 +6,7 @@ export const ProtectedLayoutWrapper = styled.div`
 export const ToggleCollapse = styled.span`
   font-size: 20px;
   color: #9f9898;
-  padding: 0 32px;
+  padding: 0 24px;
   cursor: pointer;
 `
 export const HeaderDivider = styled.div`
