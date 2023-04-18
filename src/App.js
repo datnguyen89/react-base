@@ -15,6 +15,7 @@ import HomePage from './pages/HomePage'
 import NotFoundPage from './pages/NotFoundPage'
 import ThemeProvider from './theme/ThemeProvider'
 import { topbar } from 'react-router-loading'
+import AboutUs from './pages/AboutUs'
 
 topbar.config({
   autoRun: true,
@@ -37,9 +38,11 @@ function App() {
         <Routes>
           <Route element={<AuthLayout />}>
             <Route path={PAGES.LOGIN.PATH} element={<LoginPage />} loading />
+
           </Route>
           <Route element={<ProtectedLayout />}>
             <Route path={PAGES.HOME.PATH} element={<HomePage />} loading />
+            <Route path={PAGES.ABOUT_US.PATH} element={<AboutUs />} loading />
           </Route>
           <Route path='*' element={<NotFoundPage />} />
         </Routes>

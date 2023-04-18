@@ -48,9 +48,6 @@ axiosClient.interceptors.response.use(
 
     switch (response?.data?.responseCode) {
       case RESPONSE_CODE.SUCCESS: // thành công
-      case RESPONSE_CODE.BILL_INVALID: // điều hướng sang trang đơn hàng lỗi
-      case RESPONSE_CODE.REQUIRE_CONFIRM_BANK: // yêu cầu OTP bank
-      case RESPONSE_CODE.MERCHANT_INACTIVE: // merchant không hoạt động
         break
       default:
         if (!response.config?.disableAutoError) {
@@ -83,7 +80,7 @@ axiosClient.interceptors.response.use(
             message: 'Thông báo',
             description: 'Phiên đăng nhập hết hạn',
           })
-          history.push(PAGES.LOGIN)
+          history.push(PAGES.LOGIN.PATH)
           break
         default:
           if (!originalRequest?.disableAutoError) {

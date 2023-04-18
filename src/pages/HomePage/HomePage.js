@@ -1,10 +1,14 @@
 import React, { useContext, useEffect } from 'react'
 import { HomePageWrapper } from './HomePageStyled'
 import { LoadingContext } from 'react-router-loading'
+import { DatePicker, Typography } from 'antd'
+import { useTranslation } from 'react-i18next'
+
+const { Text } = Typography
 
 const HomePage = props => {
   // region props, hook, state =================
-  const loadingContext = useContext(LoadingContext)
+  const { t } = useTranslation()
   // endregion
   // region destructuring ======================
 
@@ -13,24 +17,31 @@ const HomePage = props => {
 
   // endregion
   // region function handle logic ==============
-
+  const loadingContext = useContext(LoadingContext)
   const loading = async () => {
     loadingContext.done()
   }
+  useEffect(() => {
+    loading()
+  }, [])
+  
+
   // endregion
   // region function render ====================
 
   // endregion
   // region side effect ========================
-  useEffect(() => {
-    loading()
-  }, [])
+
   // endregion
 
   return (
     <HomePageWrapper>
-      Home
-
+      <Text>
+        <span>{t('i0001')}</span>
+      </Text>
+      <br />
+      <br />
+      <DatePicker />
     </HomePageWrapper>
   )
 }

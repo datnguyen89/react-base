@@ -3,12 +3,14 @@ import { FormLoginWrapper, LoginPageWrapper, RegisterWrapper } from './LoginPage
 import { LoadingContext } from 'react-router-loading'
 import IMAGES from '../../images'
 import { Button, Checkbox, Col, Form, Input, Row } from 'antd'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { PAGES } from '../../constant'
 
 
 const LoginPage = props => {
   // region props, hook, state =================
   const loadingContext = useContext(LoadingContext)
+  const navigate = useNavigate()
   // endregion
   // region destructuring ======================
 
@@ -20,6 +22,10 @@ const LoginPage = props => {
 
   const loading = async () => {
     loadingContext.done()
+  }
+  const handleSubmitLogin = (e) => {
+    console.log(e)
+    navigate(PAGES.HOME.PATH)
   }
   // endregion
   // region function render ====================
@@ -46,6 +52,7 @@ const LoginPage = props => {
           colon={false}
           layout={'vertical'}
           className={'login-form'}
+          onFinish={handleSubmitLogin}
         >
           <Row>
             <Col span={24}>
@@ -71,7 +78,7 @@ const LoginPage = props => {
               </Form.Item>
             </Col>
             <Col span={24}>
-              <Button type={'primary'} block>LOG IN</Button>
+              <Button type={'primary'} htmlType={'submit'} block>LOG IN</Button>
             </Col>
             <Col span={24}>
               <RegisterWrapper>

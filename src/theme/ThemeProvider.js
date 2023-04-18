@@ -1,11 +1,17 @@
-import React from 'react'
-import viVN from 'antd/lib/locale/vi_VN'
+import React, { useEffect } from 'react'
+import viVN from 'antd/locale/vi_VN'
+import enUS from 'antd/locale/en_US'
 import moment from 'moment'
-import 'moment/locale/vi'
+import 'dayjs/locale/vi';
+import 'dayjs/locale/en';
 import { ConfigProvider, theme } from 'antd'
-import { useRecoilValue } from 'recoil'
-import { isDarkModeState } from '../recoil/commonState'
-import { THEME } from '../constant'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
+import { deviceState, isDarkModeState, languageState } from '../recoil/commonState'
+import { DEVICE, THEME } from '../constant'
+import { ThemeProviderWrapper } from './ThemeProviderStyled'
+import { useTranslation } from 'react-i18next'
+import { useMediaQuery } from 'react-responsive'
+import '../i18n'
 
 moment.locale('vi')
 
@@ -21,10 +27,34 @@ const ThemeProvider = props => {
 
   const { defaultAlgorithm, darkAlgorithm } = theme
   const isDarkMode = useRecoilValue(isDarkModeState)
+  const language = useRecoilValue(languageState)
+  const setDevice = useSetRecoilState(deviceState)
+
+  const { i18n } = useTranslation()
+
+  const isDesktop = useMediaQuery({ minWidth: 1024 })
+  const isTablet = useMediaQuery({ minWidth: 768, maxWidth: 1023 })
+  const isMobile = useMediaQuery({ maxWidth: 767 })
+
+  useEffect(() => {
+    i18n.changeLanguage(language)
+  }, [language])
+  useEffect(() => {
+    if (!isDesktop) return
+    setDevice(DEVICE.DESKTOP)
+  }, [isDesktop])
+  useEffect(() => {
+    if (!isTablet) return
+    setDevice(DEVICE.TABLET)
+  }, [isTablet])
+  useEffect(() => {
+    if (!isMobile) return
+    setDevice(DEVICE.MOBILE)
+  }, [isMobile])
 
   return (
     <ConfigProvider
-      locale={viVN}
+      locale={language === 'vi' ? viVN : enUS}
       getPopupContainer={node => {
         if (node) {
           return node.parentNode
@@ -35,33 +65,22 @@ const ThemeProvider = props => {
         algorithm: isDarkMode ? darkAlgorithm : defaultAlgorithm,
         token: {
           colorPrimary: THEME.PRIMARY_COLOR,
-          borderRadius: 2,
-          colorLink: '#cfa850',
-          colorLinkHover: '#cfa850',
-          colorLinkActive: '#cfa850',
-
+          borderRadius: THEME.BORDER_RADIUS,
+          colorLink: THEME.PRIMARY_COLOR,
+          colorLinkHover: THEME.PRIMARY_COLOR,
+          colorLinkActive: THEME.PRIMARY_COLOR,
         },
         components: {
-          Radio: {
-            colorPrimary: '#cfa850',
-            colorPrimaryHover: '#cfa850',
-          },
-          Checkbox: {
-            colorPrimary: '#cfa850',
-            colorPrimaryHover: '#cfa850',
-          },
           Button: {
-            colorPrimary: '#cfa850',
-            colorPrimaryHover: '#cfa850',
-          },
-          Switch: {
-            colorPrimary: '#cfa850',
-            colorPrimaryHover: '#cfa850',
+            colorPrimary: THEME.COMPONENT_COLOR,
+            colorPrimaryHover: THEME.COMPONENT_COLOR,
           },
         },
       }}
     >
-      {children}
+      <ThemeProviderWrapper isDarkMode={isDarkMode}>
+        {children}
+      </ThemeProviderWrapper>
     </ConfigProvider>
   )
 }
