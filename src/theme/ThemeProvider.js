@@ -2,8 +2,8 @@ import React, { useEffect } from 'react'
 import viVN from 'antd/locale/vi_VN'
 import enUS from 'antd/locale/en_US'
 import moment from 'moment'
-import 'dayjs/locale/vi';
-import 'dayjs/locale/en';
+import 'dayjs/locale/vi'
+import 'dayjs/locale/en'
 import { ConfigProvider, theme } from 'antd'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 import { deviceState, isDarkModeState, languageState } from '../recoil/commonState'
@@ -12,6 +12,7 @@ import { ThemeProviderWrapper } from './ThemeProviderStyled'
 import { useTranslation } from 'react-i18next'
 import { useMediaQuery } from 'react-responsive'
 import '../i18n'
+import { topbar } from 'react-router-loading'
 
 moment.locale('vi')
 
@@ -51,6 +52,18 @@ const ThemeProvider = props => {
     if (!isMobile) return
     setDevice(DEVICE.MOBILE)
   }, [isMobile])
+
+  topbar.config({
+    autoRun: true,
+    barThickness: 2,
+    barColors: {
+      0: isDarkMode ? '#fa8c16' : THEME.PRIMARY_COLOR,
+      .3: isDarkMode ? '#fa8c16' : THEME.PRIMARY_COLOR,
+      1.0: isDarkMode ? '#fa8c16' : THEME.PRIMARY_COLOR,
+    },
+    shadowBlur: 2,
+    shadowColor: '#fff',
+  })
 
   return (
     <ConfigProvider

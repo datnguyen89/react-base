@@ -14,20 +14,7 @@ import LoginPage from './pages/LoginPage'
 import HomePage from './pages/HomePage'
 import NotFoundPage from './pages/NotFoundPage'
 import ThemeProvider from './theme/ThemeProvider'
-import { topbar } from 'react-router-loading'
 import AboutUs from './pages/AboutUs'
-
-topbar.config({
-  autoRun: true,
-  barThickness: 1,
-  barColors: {
-    0: THEME.PRIMARY_COLOR,
-    .3: THEME.PRIMARY_COLOR,
-    1.0: THEME.PRIMARY_COLOR,
-  },
-  shadowBlur: 1,
-  shadowColor: 'red',
-})
 
 // endregion
 
@@ -38,7 +25,6 @@ function App() {
         <Routes>
           <Route element={<AuthLayout />}>
             <Route path={PAGES.LOGIN.PATH} element={<LoginPage />} loading />
-
           </Route>
           <Route element={<ProtectedLayout />}>
             <Route path={PAGES.HOME.PATH} element={<HomePage />} loading />
