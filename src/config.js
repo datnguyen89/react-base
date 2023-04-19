@@ -2,16 +2,12 @@ const merge = require('lodash/merge')
 
 const appConfig = {
   all: {
-    env: process.env.NODE_ENV || 'development',
-    isDev: process.env.NODE_ENV !== 'production',
-    basename: process.env.PUBLIC_URL,
-    isBrowser: typeof window !== 'undefined',
+    env: process.env.REACT_APP_ENV || process.env.NODE_ENV,
+    apiUrl: process.env.REACT_APP_API_URL,
   },
   development: {
-    apiUrl: window.BASE_URL,
   },
   production: {
-    apiUrl: window.BASE_URL,
   },
 }
 const config = merge(appConfig.all, appConfig[appConfig.all.env])
