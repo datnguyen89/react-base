@@ -2,7 +2,7 @@ import React from 'react'
 import 'antd/dist/reset.css'
 import './App.less'
 
-import LoadingOverLay from './component/LoadingOverLay'
+import LoadingOverLay from './components/LoadingOverLay'
 // region Router
 import { Routes, Route } from 'react-router-loading'
 import history from './customRouter/history'
