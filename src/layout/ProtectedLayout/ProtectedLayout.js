@@ -41,8 +41,8 @@ const ProtectedLayout = () => {
   } = theme.useToken()
 
   const isDesktop = useMediaQuery({ minWidth: 1024 })
-  // const isTablet = useMediaQuery({ minWidth: 768, maxWidth: 1023 })
-  // const isMobile = useMediaQuery({ maxWidth: 767 })
+  const isTablet = useMediaQuery({ minWidth: 768, maxWidth: 1023 })
+  const isMobile = useMediaQuery({ maxWidth: 767 })
 
   const handleToggleTheme = (checked) => {
     setIsDarkMode(checked)
@@ -54,6 +54,12 @@ const ProtectedLayout = () => {
 
   const handleClickMenu = (e) => {
     navigate(e.key)
+  }
+
+  const renderHeight = () => {
+    if (isDesktop) return 32
+    if (isTablet) return 24
+    if (isMobile) return 20
   }
 
   useEffect(() => {
@@ -82,7 +88,7 @@ const ProtectedLayout = () => {
           borderBottom: isDarkMode ? '1px solid rgb(64 64 64)' : '1px solid rgb(239 239 239)',
         }}>
           <HeaderLeft>
-            <MainLogo />
+            <MainLogo height={renderHeight()} />
             {
               isDesktop &&
               <ToggleCollapse className={'trigger'} onClick={() => setCollapsed(!collapsed)}>
@@ -106,15 +112,15 @@ const ProtectedLayout = () => {
           {
             !isDesktop &&
             <MenuOutlined style={{ fontSize: 16 }}
-              onClick={() => setOpenDrawer(true)}
+                          onClick={() => setOpenDrawer(true)}
             />
 
           }
           <Drawer
             className={'sidebar-drawer'}
             width={MAIN_SIDEBAR_DRAWER_WIDTH}
-            title="Validus"
-            placement="right"
+            title='Validus'
+            placement='right'
             onClose={() => setOpenDrawer(false)} open={openDrawer}>
             <MenuSideBar currentPage={currentPage} handleClickMenu={handleClickMenu} />
           </Drawer>

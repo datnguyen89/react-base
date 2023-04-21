@@ -8,18 +8,41 @@ export const LoginPageWrapper = styled.div`
   align-items: center;
 `
 export const FormLoginWrapper = styled.div`
-  background-color: #fff;
+  background-color: ${props => props.backgroundColor || '#fff'};
   border: 1px solid #e4e9f2;
   border-radius: 2px;
   box-shadow: none;
-  color: #222b45;
+  color: ${props => props.primaryColor};
   font-size: .9375rem;
   font-weight: 400;
   line-height: 1.25rem;
   margin: 16px;
   padding: 16px;
-  max-width: 38%;
   width: 100%;
+  max-width: 38%;
+
+  @media only screen and (min-width: 1921px) {
+    max-width: 38%;
+  }
+  @media only screen and (max-width: 1920px) {
+    max-width: 38%;
+  }
+  @media only screen and (max-width: 1600px) {
+    max-width: 38%;
+  }
+  @media only screen and (max-width: 1200px) {
+    max-width: 50%;
+  }
+  @media only screen and (max-width: 992px) {
+    max-width: 50%;
+  }
+  @media only screen and (max-width: 768px) {
+    max-width: 64%;
+  }
+  @media only screen and (max-width: 576px) {
+    max-width: 96%;
+  }
+
 
   .title {
     text-align: center;
@@ -30,7 +53,6 @@ export const FormLoginWrapper = styled.div`
 
   .subtitle {
     text-align: center;
-    color: #222b45;
     font-size: .9375rem;
     font-weight: 400;
     line-height: 1.25rem;

@@ -2,16 +2,20 @@ import React, { useContext, useEffect } from 'react'
 import { FormLoginWrapper, LoginPageWrapper, RegisterWrapper } from './LoginPageStyled'
 import { LoadingContext } from 'react-router-loading'
 import IMAGES from '../../images'
-import { Button, Checkbox, Col, Form, Input, Row } from 'antd'
+import { Button, Checkbox, Col, Form, Input, Row, theme } from 'antd'
 import { Link, useNavigate } from 'react-router-dom'
-import { PAGES } from '../../constant'
+import { PAGES, THEME } from '../../constant'
 import authenticationStore from '../../stores/authenticationStore'
+import MainLogo from '../../components/MainLogo/MainLogo'
 
 
 const LoginPage = props => {
   // region props, hook, state =================
   const loadingContext = useContext(LoadingContext)
   const navigate = useNavigate()
+  const {
+    token: { colorBgContainer },
+  } = theme.useToken()
   // endregion
   // region destructuring ======================
 
@@ -40,9 +44,9 @@ const LoginPage = props => {
   // endregion
   return (
     <LoginPageWrapper>
-      <img src={IMAGES.MAIN_LOGO} alt={'logo'} height={45} />
+      <MainLogo height={40} />
 
-      <FormLoginWrapper>
+      <FormLoginWrapper backgroundColor={colorBgContainer} primaryColor={THEME.PRIMARY_COLOR}>
         <h1 className={'title'}>
           Login
         </h1>
