@@ -8,6 +8,30 @@
   }
 }
 
+*::-webkit-scrollbar {
+  background-color: #fff;
+  width: 8px;
+}
 
+/* background of the scrollbar except button or resizer */
+*::-webkit-scrollbar-track {
+  background-color: transparent;
+}
 
+/* scrollbar itself */
+*::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 8px;
+}
+
+/* set button(top and bottom of the scrollbar) */
+*::-webkit-scrollbar-button {
+  display: none;
+}
+
+.sidebar-drawer {
+  .ant-drawer-body {
+    padding: 4px !important;
+  }
+}
 

@@ -5,6 +5,7 @@ import IMAGES from '../../images'
 import { Button, Checkbox, Col, Form, Input, Row } from 'antd'
 import { Link, useNavigate } from 'react-router-dom'
 import { PAGES } from '../../constant'
+import authenticationStore from '../../stores/authenticationStore'
 
 
 const LoginPage = props => {
@@ -25,6 +26,7 @@ const LoginPage = props => {
   }
   const handleSubmitLogin = (e) => {
     console.log(e)
+    authenticationStore.userLogin()
     navigate(PAGES.HOME.PATH)
   }
   // endregion
@@ -66,7 +68,7 @@ const LoginPage = props => {
               </Form.Item>
             </Col>
             <Col span={12}>
-              <Form.Item name={'Remember'} label={''}>
+              <Form.Item name={'Remember'} label={''} valuePropName="checked">
                 <Checkbox>
                   Remember me
                 </Checkbox>

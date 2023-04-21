@@ -1,6 +1,5 @@
 import React from 'react'
 import { LoadingOverLayWrapper } from './LoadingOverLayStyled'
-import { Spin } from 'antd'
 import { useRecoilValue } from 'recoil'
 import { appLoadingState } from '../../recoil/commonState'
 

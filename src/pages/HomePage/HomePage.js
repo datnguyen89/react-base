@@ -1,16 +1,18 @@
 import React, { useContext, useEffect } from 'react'
 import { HomePageWrapper } from './HomePageStyled'
 import { LoadingContext } from 'react-router-loading'
-import { DatePicker, Typography, Upload } from 'antd'
+import { Button, DatePicker, Typography } from 'antd'
 import { useTranslation } from 'react-i18next'
-import { log } from '@craco/craco/dist/lib/logger'
 import config from '../../config'
+import { useResetRecoilState } from 'recoil'
+import { accessTokenState } from '../../recoil/authenticationState'
 
 const { Text } = Typography
 
 const HomePage = props => {
   // region props, hook, state =================
   const { t } = useTranslation()
+  const resetToken = useResetRecoilState(accessTokenState)
   // endregion
   // region destructuring ======================
 
@@ -19,6 +21,9 @@ const HomePage = props => {
 
   // endregion
   // region function handle logic ==============
+  const handleClearToken = () => {
+    resetToken()
+  }
   const loadingContext = useContext(LoadingContext)
   const loading = async () => {
     loadingContext.done()
@@ -42,9 +47,64 @@ const HomePage = props => {
       </Text>
       <br />
       <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
       <div>api url{process.env.REACT_APP_API_URL}</div>
       <div>env {config.env}</div>
       <div>apiUrl {config.apiUrl}</div>
+      <br />
+      <br />
+      <Button onClick={handleClearToken}>Clear Token</Button>
       <DatePicker />
     </HomePageWrapper>
   )

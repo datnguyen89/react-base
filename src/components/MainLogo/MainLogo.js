@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { MainLogoWrapper } from './MainLogoStyled'
 import { useRecoilValue } from 'recoil'
 import { isDarkModeState } from '../../recoil/commonState'

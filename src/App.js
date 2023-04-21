@@ -4,10 +4,10 @@ import './App.less'
 
 import LoadingOverLay from './components/LoadingOverLay'
 // region Router
-import { Routes, Route } from 'react-router-loading'
+import { Route, Routes } from 'react-router-loading'
 import history from './customRouter/history'
 import CustomRouter from './customRouter/CustomRouter'
-import { PAGES, THEME } from './constant'
+import { PAGES } from './constant'
 import AuthLayout from './layout/AuthLayout'
 import ProtectedLayout from './layout/ProtectedLayout'
 import LoginPage from './pages/LoginPage'
