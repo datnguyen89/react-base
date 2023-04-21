@@ -5,7 +5,7 @@ export const AuthLayoutWrapper = styled.div`
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-color: ${props => props.isDarkMode ? '#000' : 'transparent'};
+  background-color: ${props => props.isDarkMode ? 'rgb(20 20 20)' : 'transparent'};
   background-image: url(${IMAGES.AUTH_BG});
   background-repeat: no-repeat;
   background-position: center 110px;
