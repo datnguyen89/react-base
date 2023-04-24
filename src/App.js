@@ -15,6 +15,7 @@ import HomePage from './pages/HomePage'
 import NotFoundPage from './pages/NotFoundPage'
 import ThemeProvider from './theme/ThemeProvider'
 import AboutUs from './pages/AboutUs'
+import TestPage from './pages/TestPage'
 
 // endregion
 
@@ -28,6 +29,7 @@ function App() {
           </Route>
           <Route element={<ProtectedLayout />}>
             <Route path={PAGES.HOME.PATH} element={<HomePage />} loading />
+            <Route path={PAGES.TEST.PATH} element={<TestPage />} loading />
             <Route path={PAGES.ABOUT_US.PATH} element={<AboutUs />} loading />
           </Route>
           <Route path='*' element={<NotFoundPage />} />

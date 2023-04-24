@@ -29,7 +29,9 @@
     "recoil": "^0.7.7",
     "recoil-nexus": "^0.4.0",
     "styled-components": "^5.3.9",
-    "web-vitals": "^2.1.0"
+    "web-vitals": "^2.1.0",
+    "yup": "^0.32.9",
+    "formik": "^2.2.6"
   },
   "scripts": {
     "start:dev": "env-cmd -f .env.dev craco start",

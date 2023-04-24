@@ -11,6 +11,7 @@ const MenuSideBar = props => {
   const { currentPage, handleClickMenu } = props
   const { t } = useTranslation()
   const isDarkMode = useRecoilValue(isDarkModeState)
+
   function getItem(label, key, icon, children, type) {
     return {
       key,
@@ -20,9 +21,11 @@ const MenuSideBar = props => {
       type,
     }
   }
+
   const items = [
     getItem(t('i0002'), PAGES.HOME.PATH, <HomeOutlined />),
     getItem(t('i0003'), PAGES.ABOUT_US.PATH, <InfoCircleOutlined />),
+    getItem(t('i0004'), PAGES.TEST.PATH, <InfoCircleOutlined />),
   ]
 
   return (

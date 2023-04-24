@@ -19,6 +19,10 @@ export const PAGES = {
     PATH: '/about-us',
     NAME: 'about-us',
   },
+  TEST: {
+    PATH: '/test',
+    NAME: 'test',
+  },
 }
 
 export const RESPONSE_CODE = {
@@ -28,7 +32,7 @@ export const RESPONSE_CODE = {
 export const THEME = {
   PRIMARY_COLOR: '#765de6',
   COMPONENT_COLOR: '#765de6',
-  BORDER_RADIUS: 2,
+  BORDER_RADIUS: 4,
 }
 export const DEVICE = {
   MOBILE: 'MOBILE', // width <= 767px
