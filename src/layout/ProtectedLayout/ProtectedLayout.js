@@ -111,8 +111,9 @@ const ProtectedLayout = () => {
           </HeaderLeft>
           {
             !isDesktop &&
-            <MenuOutlined style={{ fontSize: 16 }}
-                          onClick={() => setOpenDrawer(true)}
+            <MenuOutlined
+              style={{ fontSize: 16 }}
+              onClick={() => setOpenDrawer(true)}
             />
 
           }
@@ -121,7 +122,8 @@ const ProtectedLayout = () => {
             width={MAIN_SIDEBAR_DRAWER_WIDTH}
             title='Validus'
             placement='right'
-            onClose={() => setOpenDrawer(false)} open={openDrawer}>
+            onClose={() => setOpenDrawer(false)}
+            open={openDrawer}>
             <MenuSideBar currentPage={currentPage} handleClickMenu={handleClickMenu} />
           </Drawer>
         </Header>

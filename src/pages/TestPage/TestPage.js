@@ -1,13 +1,14 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { FormItemWrapper, TestPageWrapper } from './TestPageStyled'
 import { LoadingContext } from 'react-router-loading'
-import * as Yup from 'yup'
-import { Button, Col, Form, Input, Row } from 'antd'
-import { ErrorMessage, Field, Formik } from 'formik'
-
+import { Button, Col, ConfigProvider, Drawer, Form, Input, Row, theme, Typography } from 'antd'
 
 const TestPage = props => {
+
+  const {
+    token: { colorBgContainer },
+  } = theme.useToken()
 
   const loadingContext = useContext(LoadingContext)
   const loading = async () => {
@@ -23,12 +24,21 @@ const TestPage = props => {
   //   console.log(values)
   // },  [values])
 
+
+  const [open, setOpen] = useState(false);
+  const showDrawer = () => {
+    setOpen(true);
+  };
+  const onClose = () => {
+    setOpen(false);
+  };
+
   return (
-    <TestPageWrapper>
+    <TestPageWrapper backgroundColor={colorBgContainer}>
       <Form onFinish={handleFinish}>
         <Row gutter={[8, 8]}>
           <Col span={10}>
-            <FormItemWrapper>
+            <FormItemWrapper backgroundColor={colorBgContainer}>
               <label htmlFor={'Username'}>Tên đăng nhập</label>
               <Form.Item noStyle={true} label={'Tên đăng nhập'} name={'Username'}>
                 <Input placeholder={'Username'} />
@@ -36,7 +46,7 @@ const TestPage = props => {
             </FormItemWrapper>
           </Col>
           <Col span={10}>
-            <FormItemWrapper>
+            <FormItemWrapper backgroundColor={colorBgContainer}>
               <label htmlFor={'FullName'}>Họ và tên</label>
               <Form.Item noStyle={true} label={'Họ và tên'} name={'FullName'}>
                 <Input placeholder={'FullName'} />
@@ -49,40 +59,38 @@ const TestPage = props => {
         </Row>
       </Form>
       <br />
-      <Formik
-        initialValues={{ firstName: '', lastName: '', email: '' }}
-        validationSchema={Yup.object({
-          firstName: Yup.string()
-            .max(15, 'Must be 15 characters or less')
-            .required('Required'),
-          lastName: Yup.string()
-            .max(20, 'Must be 20 characters or less')
-            .required('Required'),
-          email: Yup.string().email('Invalid email address').required('Required'),
-        })}
-        onSubmit={(values, { setSubmitting }) => {
-          setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
-            setSubmitting(false);
-          }, 400);
-        }}
-      >
-        <Form>
-          <label htmlFor="firstName">First Name</label>
-          <Field name="firstName" type="text" />
-          <ErrorMessage name="firstName" />
+      <>
+        <ConfigProvider
+          theme={{
+            token: {
+              colorPrimary: '#1890ff',
+            },
+          }}
+        >
+          <Button type="primary" onClick={showDrawer}>
+            Open drawer
+          </Button>
+        </ConfigProvider>
 
-          <label htmlFor="lastName">Last Name</label>
-          <Field name="lastName" type="text" />
-          <ErrorMessage name="lastName" />
+        <Drawer title="Basic Drawer" placement="right" onClose={onClose} open={open}>
+          <div>
+            <p>
+              <Typography.Text>
+                Some contents
+              </Typography.Text>
+            </p>
+            <p>
+              <Typography.Text>
+                Some contents
+              </Typography.Text>
+            </p>
 
-          <label htmlFor="email">Email Address</label>
-          <Field name="email" type="email" />
-          <ErrorMessage name="email" />
 
-          <button type="submit">Submit</button>
-        </Form>
-      </Formik>
+          </div>
+        </Drawer>
+      </>
+      <br />
+      <br />
     </TestPageWrapper>
   )
 }

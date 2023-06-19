@@ -68,12 +68,6 @@ const ThemeProvider = props => {
   return (
     <ConfigProvider
       locale={language === 'vi' ? viVN : enUS}
-      getPopupContainer={node => {
-        if (node) {
-          return node.parentNode
-        }
-        return document.body
-      }}
       theme={{
         algorithm: isDarkMode ? darkAlgorithm : defaultAlgorithm,
         token: {
@@ -84,10 +78,10 @@ const ThemeProvider = props => {
           colorLinkActive: THEME.PRIMARY_COLOR,
         },
         components: {
-          Button: {
-            colorPrimary: THEME.COMPONENT_COLOR,
-            colorPrimaryHover: THEME.COMPONENT_COLOR,
-          },
+          // Button: {
+          //   colorPrimary: THEME.COMPONENT_COLOR,
+          //   colorPrimaryHover: THEME.COMPONENT_COLOR,
+          // },
         },
       }}
     >
