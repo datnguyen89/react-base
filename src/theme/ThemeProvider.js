@@ -33,9 +33,10 @@ const ThemeProvider = props => {
 
   const { i18n } = useTranslation()
 
-  const isDesktop = useMediaQuery({ minWidth: 1024 })
-  const isTablet = useMediaQuery({ minWidth: 768, maxWidth: 1023 })
-  const isMobile = useMediaQuery({ maxWidth: 767 })
+  const isDesktop = useMediaQuery({ minWidth: 1200 })
+  const isLapTop = useMediaQuery({ minWidth: 769, maxWidth: 1199 })
+  const isTablet = useMediaQuery({ minWidth: 426, maxWidth: 768 })
+  const isMobile = useMediaQuery({ maxWidth: 425 })
 
   useEffect(() => {
     i18n.changeLanguage(language)
@@ -44,6 +45,10 @@ const ThemeProvider = props => {
     if (!isDesktop) return
     setDevice(DEVICE.DESKTOP)
   }, [isDesktop])
+  useEffect(() => {
+    if (!isLapTop) return
+    setDevice(DEVICE.LAPTOP)
+  }, [isLapTop])
   useEffect(() => {
     if (!isTablet) return
     setDevice(DEVICE.TABLET)

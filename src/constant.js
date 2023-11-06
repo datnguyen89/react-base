@@ -35,8 +35,9 @@ export const THEME = {
   BORDER_RADIUS: 4,
 }
 export const DEVICE = {
-  MOBILE: 'MOBILE', // width <= 767px
-  TABLET: 'TABLET', // 768px <= width <= 1023px
-  DESKTOP: 'DESKTOP', // width >= 1024px
+  MOBILE: 'MOBILE', // width <= 425
+  TABLET: 'TABLET', // 426 <= width <= 768
+  LAPTOP: 'LAPTOP', // 769 <= width <= 1199
+  DESKTOP: 'DESKTOP', // width >= 1200
 }
 // endregion
