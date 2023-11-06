@@ -34,8 +34,8 @@
     "formik": "^2.2.6"
   },
   "scripts": {
-    "start:dev": "env-cmd -f .env.dev craco start",
-    "build:dev": "env-cmd -f .env.dev craco build",
+    "start:sit": "env-cmd -f .env.sit craco start",
+    "build:sit": "env-cmd -f .env.sit craco build",
     "start:uat": "env-cmd -f .env.uat craco start",
     "build:uat": "env-cmd -f .env.uat craco build",
     "start:prod": "env-cmd -f .env.prod craco start",

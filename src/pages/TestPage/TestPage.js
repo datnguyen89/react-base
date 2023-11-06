@@ -60,6 +60,7 @@ const TestPage = props => {
       </Form>
       <br />
       <>
+        {/*Custom theme color for some special component*/}
         <ConfigProvider
           theme={{
             token: {
