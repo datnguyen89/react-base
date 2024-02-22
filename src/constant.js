@@ -34,9 +34,12 @@ export const THEME = {
   COMPONENT_COLOR: '#765de6',
   BORDER_RADIUS: 4,
 }
-export const DEVICE = {
-  MOBILE: 'MOBILE', // width <= 767px
-  TABLET: 'TABLET', // 768px <= width <= 1023px
-  DESKTOP: 'DESKTOP', // width >= 1024px
+export const BREAKPOINT = {
+  XS: 'XS', // width < 576
+  SM: 'SM', // 576 <= width < 768
+  MD: 'MD', // 768 <= width < 992
+  LG: 'LG', // 992 <= width < 1200
+  XL: 'XL', // 1200 <= width < 1600
+  XXL: 'XXL', // width >= 1600
 }
 // endregion

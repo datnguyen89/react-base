@@ -4,10 +4,10 @@ import enUS from 'antd/locale/en_US'
 import moment from 'moment'
 import 'dayjs/locale/vi'
 import 'dayjs/locale/en'
-import { ConfigProvider, theme } from 'antd'
+import { ConfigProvider, Grid, theme } from 'antd'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
-import { deviceState, isDarkModeState, languageState } from '../recoil/commonState'
-import { DEVICE, THEME } from '../constant'
+import { breakPointState, isDarkModeState, languageState } from '../recoil/commonState'
+import { BREAKPOINT, THEME } from '../constant'
 import { ThemeProviderWrapper } from './ThemeProviderStyled'
 import { useTranslation } from 'react-i18next'
 import { useMediaQuery } from 'react-responsive'
@@ -15,7 +15,7 @@ import '../i18n'
 import { topbar } from 'react-router-loading'
 
 moment.locale('vi')
-
+const { useBreakpoint } = Grid
 // notification.config({
 //   duration: 5,
 //   top: 60,
@@ -25,34 +25,48 @@ moment.locale('vi')
 
 const ThemeProvider = props => {
   const { children } = props
-
+  const screens = useBreakpoint()
   const { defaultAlgorithm, darkAlgorithm } = theme
   const isDarkMode = useRecoilValue(isDarkModeState)
   const language = useRecoilValue(languageState)
-  const setDevice = useSetRecoilState(deviceState)
+  const setBreakPointState = useSetRecoilState(breakPointState)
 
   const { i18n } = useTranslation()
 
-  const isDesktop = useMediaQuery({ minWidth: 1600 })
-  const isLapTop = useMediaQuery({ minWidth: 769, maxWidth: 1599 })
-  const isTablet = useMediaQuery({ minWidth: 481, maxWidth: 768 })
-  const isMobile = useMediaQuery({ maxWidth: 480 })
+  const isXS = useMediaQuery({ maxWidth: 575 })
+  const isSM = useMediaQuery({ minWidth: 576, maxWidth: 767 })
+  const isMD = useMediaQuery({ minWidth: 768, maxWidth: 991 })
+  const isLG = useMediaQuery({ minWidth: 992, maxWidth: 1199 })
+  const isXL = useMediaQuery({ minWidth: 1200, maxWidth: 1599 })
+  const isXXL = useMediaQuery({ minWidth: 1600 })
 
   useEffect(() => {
     i18n.changeLanguage(language)
   }, [language])
   useEffect(() => {
-    if (!isDesktop) return
-    setDevice(DEVICE.DESKTOP)
-  }, [isDesktop])
+    if (!isXS) return
+    setBreakPointState(BREAKPOINT.XS)
+  }, [isXS])
   useEffect(() => {
-    if (!isTablet) return
-    setDevice(DEVICE.TABLET)
-  }, [isTablet])
+    if (!isSM) return
+    setBreakPointState(BREAKPOINT.SM)
+  }, [isSM])
   useEffect(() => {
-    if (!isMobile) return
-    setDevice(DEVICE.MOBILE)
-  }, [isMobile])
+    if (!isMD) return
+    setBreakPointState(BREAKPOINT.MD)
+  }, [isMD])
+  useEffect(() => {
+    if (!isLG) return
+    setBreakPointState(BREAKPOINT.LG)
+  }, [isLG])
+  useEffect(() => {
+    if (!isXL) return
+    setBreakPointState(BREAKPOINT.XL)
+  }, [isXL])
+  useEffect(() => {
+    if (!isXXL) return
+    setBreakPointState(BREAKPOINT.XXL)
+  }, [isXXL])
 
   topbar.config({
     autoRun: true,

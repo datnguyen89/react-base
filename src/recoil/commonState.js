@@ -1,6 +1,6 @@
 import { atom } from 'recoil'
 import { localStorageEffect } from './recoilHelper'
-import { DEVICE } from '../constant'
+import { BREAKPOINT } from '../constant'
 
 export const collapsedState = atom({
   key: 'collapsedState',
@@ -31,9 +31,9 @@ export const appLoadingState = atom({
   default: 0,
 })
 
-export const deviceState = atom({
-  key: 'deviceState',
-  default: DEVICE.DESKTOP,
+export const breakPointState = atom({
+  key: 'breakPointState',
+  default: BREAKPOINT.XXL,
 })
 export const currentPageState = atom({
   key: 'currentPageState',

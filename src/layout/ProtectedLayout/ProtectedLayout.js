@@ -9,12 +9,13 @@ import {
 } from './ProtectedLayoutStyled'
 import { Drawer, Layout, Switch, theme } from 'antd'
 import { useRecoilState, useRecoilValue } from 'recoil'
-import { collapsedState, currentPageState, isDarkModeState } from '../../recoil/commonState'
+import { breakPointState, collapsedState, currentPageState, isDarkModeState } from '../../recoil/commonState'
 import { MenuFoldOutlined, MenuOutlined, MenuUnfoldOutlined } from '@ant-design/icons'
 import IMAGES from '../../images'
 import ToggleLanguage from '../../components/ToggleLanguage'
 import MainLogo from '../../components/MainLogo/MainLogo'
 import {
+  BREAKPOINT,
   MAIN_HEADER_HEIGHT,
   MAIN_SIDEBAR_COLLAPSE_WIDTH,
   MAIN_SIDEBAR_DRAWER_WIDTH,
@@ -31,18 +32,17 @@ const ProtectedLayout = () => {
   const location = useLocation()
   const navigate = useNavigate()
   const accessToken = useRecoilValue(accessTokenState)
+
   const [currentPage, setCurrentPage] = useRecoilState(currentPageState)
   const [collapsed, setCollapsed] = useRecoilState(collapsedState)
   const [isDarkMode, setIsDarkMode] = useRecoilState(isDarkModeState)
+  const breakPoint = useRecoilValue(breakPointState)
+
   const [openDrawer, setOpenDrawer] = useState(false)
 
   const {
     token: { colorBgContainer },
   } = theme.useToken()
-
-  const isDesktop = useMediaQuery({ minWidth: 1024 })
-  const isTablet = useMediaQuery({ minWidth: 768, maxWidth: 1023 })
-  const isMobile = useMediaQuery({ maxWidth: 767 })
 
   const handleToggleTheme = (checked) => {
     setIsDarkMode(checked)
@@ -57,9 +57,18 @@ const ProtectedLayout = () => {
   }
 
   const renderHeight = () => {
-    if (isDesktop) return 32
-    if (isTablet) return 24
-    if (isMobile) return 20
+    switch (breakPoint) {
+      case BREAKPOINT.XS:
+      case BREAKPOINT.SM:
+        return 20
+      case BREAKPOINT.MD:
+      case BREAKPOINT.LG:
+      case BREAKPOINT.XL:
+        return 24
+      default:
+        return 32
+    }
+
   }
 
   useEffect(() => {
@@ -70,6 +79,10 @@ const ProtectedLayout = () => {
       setCurrentPage(`/${segment[0]}`)
     }
   }, [location.pathname])
+
+  useEffect(() => {
+    console.log('breakPoint', breakPoint)
+  }, [breakPoint])
 
   return (
     <ProtectedLayoutWrapper>
@@ -90,7 +103,7 @@ const ProtectedLayout = () => {
           <HeaderLeft>
             <MainLogo height={renderHeight()} />
             {
-              isDesktop &&
+              (breakPoint === BREAKPOINT.XL || breakPoint === BREAKPOINT.XXL || breakPoint === BREAKPOINT.LG) &&
               <ToggleCollapse className={'trigger'} onClick={() => setCollapsed(!collapsed)}>
                 {
                   collapsed
@@ -110,7 +123,7 @@ const ProtectedLayout = () => {
             </ChangeLanguage>
           </HeaderLeft>
           {
-            !isDesktop &&
+            !(breakPoint === BREAKPOINT.XL || breakPoint === BREAKPOINT.XXL || breakPoint === BREAKPOINT.LG) &&
             <MenuOutlined
               style={{ fontSize: 16 }}
               onClick={() => setOpenDrawer(true)}
@@ -129,7 +142,7 @@ const ProtectedLayout = () => {
         </Header>
         <Layout>
           {
-            isDesktop &&
+            (breakPoint === BREAKPOINT.XL || breakPoint === BREAKPOINT.XXL || breakPoint === BREAKPOINT.LG) &&
             <Sider
               width={MAIN_SIDEBAR_EXTEND_WIDTH}
               collapsedWidth={MAIN_SIDEBAR_COLLAPSE_WIDTH}
@@ -152,7 +165,7 @@ const ProtectedLayout = () => {
           }
           <Content
             style={{
-              marginLeft: isDesktop ?
+              marginLeft: (breakPoint === BREAKPOINT.XL || breakPoint === BREAKPOINT.XXL || breakPoint === BREAKPOINT.LG) ?
                 collapsed
                   ? MAIN_SIDEBAR_COLLAPSE_WIDTH
                   : MAIN_SIDEBAR_EXTEND_WIDTH
