@@ -165,6 +165,7 @@ const ProtectedLayout = () => {
           }
           <Content
             style={{
+              transitionDuration: '0.2s',
               marginLeft: (breakPoint === BREAKPOINT.XL || breakPoint === BREAKPOINT.XXL || breakPoint === BREAKPOINT.LG) ?
                 collapsed
                   ? MAIN_SIDEBAR_COLLAPSE_WIDTH
