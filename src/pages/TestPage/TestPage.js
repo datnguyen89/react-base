@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { FormItemWrapper, TestPageWrapper } from './TestPageStyled'
 import { LoadingContext } from 'react-router-loading'
-import { Button, Col, ConfigProvider, Drawer, Form, Input, Row, theme, Typography } from 'antd'
+import { Button, Col, ConfigProvider, DatePicker, Drawer, Form, Input, Row, theme, Typography } from 'antd'
 
 const TestPage = props => {
 
@@ -36,24 +36,23 @@ const TestPage = props => {
   return (
     <TestPageWrapper backgroundColor={colorBgContainer}>
       <Form onFinish={handleFinish}>
-        <Row gutter={[8, 8]}>
-          <Col span={10}>
-            <FormItemWrapper backgroundColor={colorBgContainer}>
-              <label htmlFor={'Username'}>Tên đăng nhập</label>
-              <Form.Item noStyle={true} label={'Tên đăng nhập'} name={'Username'}>
-                <Input placeholder={'Username'} />
-              </Form.Item>
-            </FormItemWrapper>
+        <Row gutter={[8,8]}>
+          <Col>
+            <Form.Item noStyle={true} label={'Họ và tên'} name={'FullName'}>
+              <Input placeholder={'FullName'} />
+            </Form.Item>
           </Col>
-          <Col span={10}>
-            <FormItemWrapper backgroundColor={colorBgContainer}>
-              <label htmlFor={'FullName'}>Họ và tên</label>
-              <Form.Item noStyle={true} label={'Họ và tên'} name={'FullName'}>
-                <Input placeholder={'FullName'} />
-              </Form.Item>
-            </FormItemWrapper>
+          <Col>
+            <Form.Item noStyle={true} label={'Tên đăng nhập'} name={'Username'}>
+              <Input placeholder={'Username'} />
+            </Form.Item>
           </Col>
-          <Col span={4}>
+          <Col>
+            <Form.Item  label={'Ngày sinh'} name={'BirthDate'}>
+              <DatePicker />
+            </Form.Item>
+          </Col>
+          <Col>
             <Button type={'primary'} htmlType={'submit'}>Submit</Button>
           </Col>
         </Row>
