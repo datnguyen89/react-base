@@ -28,11 +28,11 @@ function App() {
       <CustomRouter history={history}>
         <Routes>
           <Route element={<AuthLayout />}>
-            {/*<Route path={PAGES.LOGIN.PATH} element={<LoginPage />} loading />*/}
+            <Route path={PAGES.LOGIN.PATH} element={<LoginPage />} loading />
           </Route>
           <Route element={<ProtectedLayout />}>
             <Route path={PAGES.TEST.PATH} element={<TestPage />} loading />
-            {/*<Route path={PAGES.ABOUT_US.PATH} element={<AboutUs />} loading />*/}
+            <Route path={PAGES.ABOUT_US.PATH} element={<AboutUs />} loading />
             <Route path={PAGES.I18N.PATH} element={<I18nPage />} loading />
           </Route>
           <Route element={<PublicLayout />}>
