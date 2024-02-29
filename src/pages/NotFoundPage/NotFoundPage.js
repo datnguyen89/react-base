@@ -15,7 +15,7 @@ const NotFoundPage = props => {
         navigate(-1, { state: state, replace: true })
         break
       case 2:
-        navigate(PAGES.PAYMENT_METHOD, { state: state, replace: true })
+        navigate(PAGES.HOME.PATH, { state: state, replace: true })
         break
       default:
         break

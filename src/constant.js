@@ -10,11 +10,11 @@ export const PAGES = {
     PATH: '/login',
     NAME: 'login',
   },
-
-  HOME: {
-    PATH: '/',
-    NAME: 'home',
+  I18N: {
+    PATH: '/i18n',
+    NAME: 'i18n',
   },
+
   ABOUT_US: {
     PATH: '/about-us',
     NAME: 'about-us',
@@ -23,6 +23,14 @@ export const PAGES = {
     PATH: '/test',
     NAME: 'test',
   },
+  HOME: {
+    PATH: '/',
+    NAME: 'home',
+  },
+  LOOKUP_ACCOUNT: {
+    PATH: '/chon-tai-khoan-so-dep',
+    NAME: 'lookup-account',
+  },
 }
 
 export const RESPONSE_CODE = {
@@ -30,8 +38,8 @@ export const RESPONSE_CODE = {
 }
 
 export const THEME = {
-  PRIMARY_COLOR: '#765de6',
-  COMPONENT_COLOR: '#765de6',
+  PRIMARY_COLOR: '#00B74F',
+  COMPONENT_COLOR: '#00B74F',
   BORDER_RADIUS: 4,
 }
 export const BREAKPOINT = {
@@ -42,4 +50,20 @@ export const BREAKPOINT = {
   XL: 'XL', // 1200 <= width < 1600
   XXL: 'XXL', // width >= 1600
 }
+export const CONTAINER_WIDTH = {
+  XXL: 80,
+  XL: 80,
+  LG: 80,
+  MD: 90,
+  SM: 100,
+  XS: 100,
+}
+export const ERROR_COLOR = 'red'
+export const ERROR_TITLE = 'Thông báo lỗi'
+export const SUCCESS_TITLE = 'Thông báo'
+export const SUCCESS_COLOR = '#52c41a'
+export const INFO_COLOR = '#0465B0'
+export const INFO_TITLE = 'Thông báo'
+export const WARNING_COLOR = '#faad14'
+export const WARNING_TITLE = 'Cảnh báo'
 // endregion

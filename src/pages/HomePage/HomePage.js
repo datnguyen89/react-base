@@ -6,24 +6,17 @@ import { useTranslation } from 'react-i18next'
 import config from '../../config'
 import { useResetRecoilState } from 'recoil'
 import { accessTokenState } from '../../recoil/authenticationState'
+import MainBanner from '../../components/MainBanner'
+import IntroService from '../../components/IntroService'
+import IntroPromotion from '../../components/IntroPromotion'
+import StartJourney from '../../components/StartJourney'
 
 const { Text } = Typography
 
 const HomePage = props => {
-  // region props, hook, state =================
-  const { t } = useTranslation()
-  const resetToken = useResetRecoilState(accessTokenState)
-  // endregion
-  // region destructuring ======================
 
-  // endregion
-  // region variable ===========================
 
-  // endregion
-  // region function handle logic ==============
-  const handleClearToken = () => {
-    resetToken()
-  }
+  // region loading
   const loadingContext = useContext(LoadingContext)
   const loading = async () => {
     loadingContext.done()
@@ -31,81 +24,14 @@ const HomePage = props => {
   useEffect(() => {
     loading()
   }, [])
-
-  // endregion
-  // region function render ====================
-
-  // endregion
-  // region side effect ========================
-
   // endregion
 
   return (
     <HomePageWrapper>
-      <Text>
-        <span>{t('i0001')}</span>
-      </Text>
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <div>api url{process.env.REACT_APP_API_URL}</div>
-      <div>env {config.env}</div>
-      <div>apiUrl {config.apiUrl}</div>
-      <br />
-      <br />
-      <Button onClick={handleClearToken}>Clear Token</Button>
-      <DatePicker />
+      <MainBanner />
+      <IntroService />
+      <IntroPromotion />
+      <StartJourney />
     </HomePageWrapper>
   )
 }

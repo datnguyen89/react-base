@@ -4,7 +4,7 @@ import enUS from 'antd/locale/en_US'
 import moment from 'moment'
 import 'dayjs/locale/vi'
 import 'dayjs/locale/en'
-import { ConfigProvider, Grid, theme } from 'antd'
+import { ConfigProvider, Grid, notification, theme } from 'antd'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 import { breakPointState, isDarkModeState, languageState } from '../recoil/commonState'
 import { BREAKPOINT, THEME } from '../constant'
@@ -13,15 +13,16 @@ import { useTranslation } from 'react-i18next'
 import { useMediaQuery } from 'react-responsive'
 import '../i18n'
 import { topbar } from 'react-router-loading'
+import 'moment/locale/vi'
+import 'moment/locale/en-nz'
 
-moment.locale('vi')
 const { useBreakpoint } = Grid
-// notification.config({
-//   duration: 5,
-//   top: 60,
-//   maxCount: 1,
-//   placement: 'top',
-// })
+notification.config({
+  duration: 5,
+  maxCount: 5,
+  // top: 60,
+  // placement: 'top',
+})
 
 const ThemeProvider = props => {
   const { children } = props
@@ -32,6 +33,7 @@ const ThemeProvider = props => {
   const setBreakPointState = useSetRecoilState(breakPointState)
 
   const { i18n } = useTranslation()
+  moment.locale(language === 'vi' ? 'vi' : 'en')
 
   const isXS = useMediaQuery({ maxWidth: 575 })
   const isSM = useMediaQuery({ minWidth: 576, maxWidth: 767 })
@@ -93,10 +95,11 @@ const ThemeProvider = props => {
           colorLinkActive: THEME.PRIMARY_COLOR,
         },
         components: {
-          // Button: {
-          //   colorPrimary: THEME.COMPONENT_COLOR,
-          //   colorPrimaryHover: THEME.COMPONENT_COLOR,
-          // },
+          Table: {
+            headerBg: THEME.PRIMARY_COLOR,
+            headerSplitColor: THEME.PRIMARY_COLOR,
+            headerColor: '#fff',
+          },
         },
       }}
     >

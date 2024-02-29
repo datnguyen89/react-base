@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { FormItemWrapper, TestPageWrapper } from './TestPageStyled'
 import { LoadingContext } from 'react-router-loading'
 import { Button, Col, ConfigProvider, DatePicker, Drawer, Form, Input, Row, theme, Typography } from 'antd'
+import OtpForm from '../../components/OtpForm'
 
 const TestPage = props => {
 
@@ -90,6 +91,14 @@ const TestPage = props => {
       </>
       <br />
       <br />
+      <OtpForm
+        description={`VPBank đã gửi mã OTP đến số điện thoại 0987655xxx`}
+        visible={true}
+        callbackOtp={(e) => {
+          console.log(e)
+        }}
+        onCancel={() => {
+        }} />
     </TestPageWrapper>
   )
 }
