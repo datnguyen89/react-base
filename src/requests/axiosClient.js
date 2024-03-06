@@ -13,7 +13,9 @@ const axiosClient = axios.create({
   headers: {
     'content-type': 'application/json',
   },
-  paramsSerializer: params => queryString.stringify(params),
+  paramsSerializer: {
+    serialize: params => queryString.stringify(params),
+  },
 })
 // axiosClient.defaults.headers.common['HostClient'] = getRecoil('')
 axiosClient.interceptors.request.use(
