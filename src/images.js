@@ -18,7 +18,7 @@ const IMAGES = {
   WHITE_LOGO: require('./media/white-logo.png'),
   FOOTER_LEFT: require('./media/footer-left-bg.png'),
   FOOTER_RIGHT: require('./media/footer-right-bg.png'),
-  BANNER_BG: require('./media/banner-bg.png'),
+  BANNER_BG: require('./media/hero-bg.jpg'),
   INTRO_1: require('./media/intro-img-1.png'),
   INTRO_2: require('./media/intro-img-2.png'),
   INTRO_3: require('./media/intro-img-3.png'),

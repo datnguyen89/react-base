@@ -16,15 +16,10 @@ const MainBanner = () => {
       <Container height={'100%'}>
         <MainBannerContent>
           <BannerTitle>
-            Chọn tài khoản số đẹp{breakPoint === BREAKPOINT.XS ? '\n' : ' - '}Đón tài lộc kinh doanh
+            WebTeck - IT Solution & Technology
           </BannerTitle>
-          <BannerDesc>Quản lý tài chính an toàn, hiệu quả. Tận hường cực nhiều ưu đãi.</BannerDesc>
-          <Button
-            onClick={() => navigate(PAGES.LOOKUP_ACCOUNT.PATH)}
-            style={{ color: '#00B74F' }}
-          >
-            Đăng ký tài khoản số đẹp <ArrowRightOutlined />
-          </Button>
+          <BannerDesc>Providing Technology For Smart IT Solution</BannerDesc>
+
         </MainBannerContent>
       </Container>
     </MainBannerWrapper>
