@@ -7,11 +7,15 @@ import { Link, useNavigate } from 'react-router-dom'
 import { PAGES, THEME } from '../../constant'
 import authenticationStore from '../../stores/authenticationStore'
 import MainLogo from '../../components/MainLogo/MainLogo'
+import ToggleLanguage from '../../components/ToggleLanguage'
+import { ChangeLanguage } from '../../layout/ProtectedLayout/ProtectedLayoutStyled'
+import { useTranslation } from 'react-i18next'
 
 
 const LoginPage = props => {
   // region props, hook, state =================
   const loadingContext = useContext(LoadingContext)
+  const { t } = useTranslation()
   const navigate = useNavigate()
   const {
     token: { colorBgContainer },
@@ -47,8 +51,11 @@ const LoginPage = props => {
       <MainLogo height={40} />
 
       <FormLoginWrapper backgroundColor={colorBgContainer} primaryColor={THEME.PRIMARY_COLOR}>
+        <ChangeLanguage>
+          <ToggleLanguage />
+        </ChangeLanguage>
         <h1 className={'title'}>
-          Login
+          {t('i0005')}
         </h1>
         <h6 className={'subtitle'}>
           Hello! Log in with your username.

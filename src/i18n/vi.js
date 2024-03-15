@@ -5,6 +5,7 @@ const vi = {
   'i0002': 'Trang chủ',
   'i0003': 'Về chúng tôi',
   'i0004': 'Thử nghiệm',
+  'i0005': 'Đăng nhập',
 }
 export default vi
 

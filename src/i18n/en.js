@@ -5,5 +5,6 @@ const en = {
   'i0002': 'Home',
   'i0003': 'About Us',
   'i0004': 'Test',
+  'i0005': 'Login',
 }
 export default en
