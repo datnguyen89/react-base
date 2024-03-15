@@ -9,7 +9,13 @@ import {
 } from './ProtectedLayoutStyled'
 import { Drawer, Layout, Switch, theme } from 'antd'
 import { useRecoilState, useRecoilValue } from 'recoil'
-import { breakPointState, collapsedState, currentPageState, isDarkModeState } from '../../recoil/commonState'
+import {
+  breakPointState,
+  collapsedState,
+  currentPageState,
+  isDarkModeState,
+  languageState,
+} from '../../recoil/commonState'
 import { MenuFoldOutlined, MenuOutlined, MenuUnfoldOutlined } from '@ant-design/icons'
 import IMAGES from '../../images'
 import ToggleLanguage from '../../components/ToggleLanguage'
@@ -37,6 +43,7 @@ const ProtectedLayout = () => {
   const [collapsed, setCollapsed] = useRecoilState(collapsedState)
   const [isDarkMode, setIsDarkMode] = useRecoilState(isDarkModeState)
   const breakPoint = useRecoilValue(breakPointState)
+  const language = useRecoilValue(languageState)
 
   const [openDrawer, setOpenDrawer] = useState(false)
 

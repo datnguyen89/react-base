@@ -17,7 +17,8 @@ import { breakPointState, currentPageState, isDarkModeState } from '../../recoil
 import { BREAKPOINT, PAGES } from '../../constant'
 import { useNavigate } from 'react-router-dom'
 import { Switch } from 'antd'
-import { ToggleTheme } from '../../layout/ProtectedLayout/ProtectedLayoutStyled'
+import { ChangeLanguage, ToggleTheme } from '../../layout/ProtectedLayout/ProtectedLayoutStyled'
+import ToggleLanguage from '../ToggleLanguage'
 
 
 const LandingHeader = props => {
@@ -30,9 +31,6 @@ const LandingHeader = props => {
     setIsDarkMode(checked)
   }
 
-  useEffect(() => {
-    console.log('currentPage', currentPage)
-  }, [currentPage])
   return (
     <LandingHeaderWrapper>
       <TopHeader>
@@ -48,12 +46,15 @@ const LandingHeader = props => {
               (breakPoint !== BREAKPOINT.XS && breakPoint !== BREAKPOINT.SM) &&
               <DividerTopHeader />
             }
-            <TopHeaderText>TÀI KHOẢN SỐ ĐẸP CHO DOANH NGHIỆP</TopHeaderText>
+            <TopHeaderText>LOREM IPSUM DOLOR SIT AMET</TopHeaderText>
             <ToggleTheme>
               <img src={isDarkMode ? IMAGES.SUN_DARK_MODE : IMAGES.SUN} alt={'sun'} height={20} width={20} />
               <Switch checked={isDarkMode} onChange={handleToggleTheme} />
               <img src={isDarkMode ? IMAGES.MOON_DARK_MODE : IMAGES.MOON} alt={'moon'} height={20} width={20} />
             </ToggleTheme>
+            <ChangeLanguage>
+              <ToggleLanguage />
+            </ChangeLanguage>
           </TopHeaderContent>
         </Container>
       </TopHeader>

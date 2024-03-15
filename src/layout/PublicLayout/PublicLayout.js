@@ -4,7 +4,7 @@ import { PublicLayoutWrapper } from './PublicLayoutStyled'
 import LandingHeader from '../../components/LandingHeader'
 import LandingFooter from '../../components/LandingFooter'
 import { useRecoilState, useRecoilValue } from 'recoil'
-import { breakPointState, currentPageState } from '../../recoil/commonState'
+import { breakPointState, currentPageState, languageState } from '../../recoil/commonState'
 import { PAGES } from '../../constant'
 import LandingBody from '../../components/LandingBody'
 
@@ -13,6 +13,7 @@ const PublicLayout = () => {
   const navigate = useNavigate()
   const [currentPage, setCurrentPage] = useRecoilState(currentPageState)
   const breakPoint = useRecoilValue(breakPointState)
+  const language = useRecoilValue(languageState)
 
   useEffect(() => {
     const segment = location.pathname.split(PAGES.HOME.PATH).filter(item => item !== '')
