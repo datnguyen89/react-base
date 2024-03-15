@@ -2,7 +2,8 @@ import styled from 'styled-components'
 import IMAGES from '../../images'
 
 export const MainBannerWrapper = styled.div`
-  background-image: linear-gradient(270deg, rgba(0, 183, 79, 0.4) -22.41%, rgba(29, 66, 137, 0.4) 108.33%), url(${IMAGES.BANNER_BG});
+  //background-image: linear-gradient(270deg, rgba(0, 183, 79, 0.4) -22.41%, rgba(29, 66, 137, 0.4) 108.33%), url(${IMAGES.BANNER_BG});
+  background-image: url(${IMAGES.BANNER_BG});
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
