@@ -25,6 +25,7 @@ const TestPage = props => {
   }, [])
   const handleFinish = (e) => {
     console.log(e)
+    console.log(e.BirthDate.format('YYYY-MM-DD'))
   }
   // useEffect(() => {
   //   console.log(values)
@@ -63,7 +64,7 @@ const TestPage = props => {
           </Col>
           <Col>
             <Form.Item label={'Ngày sinh'} name={'BirthDate'}>
-              <DatePicker />
+              <DatePicker format={'DD-MM-YYYY'} />
             </Form.Item>
           </Col>
           <Col>

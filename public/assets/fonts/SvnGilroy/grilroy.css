@@ -64,7 +64,21 @@
     font-display: swap;
     src: url('SVN-Gilroy Medium Italic.otf') format('truetype');
 }
-
+/* Semi Bold */
+@font-face {
+    font-family: 'SVN-Gilroy';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url('SVN-Gilroy SemiBold.otf') format('truetype');
+}
+@font-face {
+    font-family: 'SVN-Gilroy';
+    font-style: italic;
+    font-weight: 600;
+    font-display: swap;
+    src: url('SVN-Gilroy SemiBold Italic.otf') format('truetype');
+}
   /* Bold */
 @font-face {
     font-family: 'SVN-Gilroy';
