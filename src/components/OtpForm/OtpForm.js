@@ -10,13 +10,13 @@ import {
   TimeLeft,
   WaitingResendOtp,
 } from './OtpFormStyled'
-import { Button, Col, Form, notification, Row } from 'antd'
+import { Button, Col, Form, notification, Row, theme, Typography } from 'antd'
 import { ColorText } from '../CommonStyled/CommonStyled'
-import { BREAKPOINT, ERROR_COLOR, ERROR_TITLE, RESPONSE_CODE, THEME } from '../../constant'
+import { BREAKPOINT, ERROR_COLOR, ERROR_TITLE, RESPONSE_CODE } from '../../constant'
 import { useRecoilValue } from 'recoil'
-import { breakPointState } from '../../recoil/commonState'
+import { breakPointState, themeState } from '../../recoil/commonState'
 
-const _ = require('lodash')
+const { Text } = Typography
 
 const OtpForm = props => {
   // region props, hook, state =================
@@ -32,6 +32,8 @@ const OtpForm = props => {
   } = props
 
   const breakPoint = useRecoilValue(breakPointState)
+  const THEME = useRecoilValue(themeState)
+  const { token: { colorBgContainer } } = theme.useToken()
 
   const [timeLeft, setTimeLeft] = useState(expiredCountTime || 180)
   const [timeResend, setTimeResend] = useState(resendCountTime || 30)
@@ -130,6 +132,7 @@ const OtpForm = props => {
   return (
     <OtpFormWrapper
       title='Nhập mã xác thực'
+      backgroundColor={colorBgContainer}
       maskClosable={false}
       visible={visible}
       footer={null}
@@ -144,13 +147,15 @@ const OtpForm = props => {
             justify={'center'}
           >
             <Col span={24}>
-              <OtpTitle>
+              <OtpTitle color={THEME.PRIMARY_COLOR}>
                 NHẬP THÔNG TIN OTP
               </OtpTitle>
               <OtpDescription>
-                {otpDescription}
-                <br />
-                Vui lòng nhập mã OTP
+                <Text>
+                  {otpDescription}
+                  <br />
+                  Vui lòng nhập mã OTP
+                </Text>
               </OtpDescription>
             </Col>
             <Col span={24}>
@@ -165,7 +170,9 @@ const OtpForm = props => {
                 focusStyle={focusStyle}
                 separator={''} />
               <ExpiredLabel>
-                Mã OTP sẽ hết hạn sau: <TimeLeft>{timeLeft}</TimeLeft>/{expiredCountTime || 180}s
+                <Text>
+                  Mã OTP sẽ hết hạn sau: <TimeLeft>{timeLeft}</TimeLeft>/{expiredCountTime || 180}s
+                </Text>
               </ExpiredLabel>
             </Col>
             <Col span={24}>

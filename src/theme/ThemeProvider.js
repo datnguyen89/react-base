@@ -6,12 +6,12 @@ import 'dayjs/locale/vi'
 import 'dayjs/locale/en'
 import { ConfigProvider, Grid, notification, theme } from 'antd'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
-import { breakPointState, isDarkModeState, languageState } from '../recoil/commonState'
-import { BREAKPOINT, THEME } from '../constant'
+import { breakPointState, isDarkModeState, languageState, themeState } from '../recoil/commonState'
+import { BREAKPOINT } from '../constant'
 import { ThemeProviderWrapper } from './ThemeProviderStyled'
 import { useTranslation } from 'react-i18next'
 import { useMediaQuery } from 'react-responsive'
-import '../i18n'
+import '../i18n/i18n'
 import { topbar } from 'react-router-loading'
 import 'moment/locale/vi'
 import 'moment/locale/en-nz'
@@ -31,6 +31,7 @@ const ThemeProvider = props => {
   const isDarkMode = useRecoilValue(isDarkModeState)
   const language = useRecoilValue(languageState)
   const setBreakPointState = useSetRecoilState(breakPointState)
+  const THEME = useRecoilValue(themeState)
 
   const { i18n } = useTranslation()
   moment.locale(language === 'vi' ? 'vi' : 'en')

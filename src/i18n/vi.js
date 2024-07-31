@@ -6,6 +6,8 @@ const vi = {
   'i0003': 'Về chúng tôi',
   'i0004': 'Thử nghiệm',
   'i0005': 'Đăng nhập',
+  'i0006': 'Họ tên',
+  'i0007': 'Tài khoản',
 }
 export default vi
 

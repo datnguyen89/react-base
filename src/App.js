@@ -18,7 +18,6 @@ import AboutUs from './pages/AboutUs'
 import TestPage from './pages/TestPage'
 import PublicLayout from './layout/PublicLayout'
 import I18nPage from './pages/I18nPage'
-import LookupAccountPage from './pages/LookupAccountPage'
 
 // endregion
 
@@ -37,7 +36,6 @@ function App() {
           </Route>
           <Route element={<PublicLayout />}>
             <Route path={PAGES.HOME.PATH} element={<HomePage />} loading />
-            <Route path={PAGES.LOOKUP_ACCOUNT.PATH} element={<LookupAccountPage />} loading />
           </Route>
           <Route path='*' element={<NotFoundPage />} />
         </Routes>

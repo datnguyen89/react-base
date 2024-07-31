@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { CONTAINER_WIDTH, THEME } from '../../constant'
+import { CONTAINER_WIDTH } from '../../constant'
 
 export const Container = styled.div`
   display: ${props => props.display || 'block'};
@@ -84,7 +84,7 @@ export const FormLabel = styled.span`
 `
 export const FormLabelSecondary = styled.span`
   color: #818181;
-  font-size: 14px;  
+  font-size: 14px;
   font-weight: 400;
   @media only screen and (max-width: 768px) {
     font-size: 11px;
@@ -112,9 +112,9 @@ export const TableWrapper = styled.div`
   background-color: #fff;
   padding: 16px;
   @media only screen and (max-width: 768px) {
-    padding: 0;    
+    padding: 0;
   }
-  
+
 `
 export const PaginationLabel = styled.span`
   color: #767676;
@@ -144,7 +144,7 @@ export const FormWrapper = styled.div`
   }
   @media only screen and (max-width: 768px) {
     width: 100%;
-  } 
+  }
 `
 export const BackArrowWrapper = styled.div`
   margin-bottom: 16px;
@@ -154,10 +154,11 @@ export const BackArrowWrapper = styled.div`
     top: 0;
     left: 0;
   }
+
   img {
     cursor: pointer;
   }
-  
+
 `
 export const AccountInfoWrapper = styled.div`
   border: 1px solid #00B74F;
@@ -194,17 +195,7 @@ export const TextInform = styled.span`
     font-size: 12px;
   }
 `
-export const TextPrimaryInform = styled.span`
-  font-size: 16px;
-  font-weight: 500;
-  color: ${THEME.PRIMARY_COLOR};
-  @media only screen and (max-width: 768px) {
-    font-size: 14px;
-  }
-  @media only screen and (max-width: 576px) {
-    font-size: 12px;
-  }
-`
+
 export const ColorText = styled.span`
   color: ${props => props.color || '#333'};
   font-weight: ${props => props.fontWeight || 'normal'};

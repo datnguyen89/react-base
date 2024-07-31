@@ -4,22 +4,23 @@ import { LoadingContext } from 'react-router-loading'
 import IMAGES from '../../images'
 import { Button, Checkbox, Col, Form, Input, Row, theme } from 'antd'
 import { Link, useNavigate } from 'react-router-dom'
-import { PAGES, THEME } from '../../constant'
+import { PAGES } from '../../constant'
 import authenticationStore from '../../stores/authenticationStore'
 import MainLogo from '../../components/MainLogo/MainLogo'
 import ToggleLanguage from '../../components/ToggleLanguage'
 import { ChangeLanguage } from '../../layout/ProtectedLayout/ProtectedLayoutStyled'
 import { useTranslation } from 'react-i18next'
+import { useRecoilValue } from 'recoil'
+import { themeState } from '../../recoil/commonState'
 
 
 const LoginPage = props => {
   // region props, hook, state =================
-  const loadingContext = useContext(LoadingContext)
   const { t } = useTranslation()
   const navigate = useNavigate()
-  const {
-    token: { colorBgContainer },
-  } = theme.useToken()
+  const { token: { colorBgContainer } } = theme.useToken()
+
+  const THEME = useRecoilValue(themeState)
   // endregion
   // region destructuring ======================
 
@@ -28,10 +29,6 @@ const LoginPage = props => {
 
   // endregion
   // region function handle logic ==============
-
-  const loading = async () => {
-    loadingContext.done()
-  }
   const handleSubmitLogin = (e) => {
     console.log(e)
     authenticationStore.userLogin()
@@ -42,6 +39,13 @@ const LoginPage = props => {
 
   // endregion
   // region side effect ========================
+
+  // endregion
+  // region loading
+  const loadingContext = useContext(LoadingContext)
+  const loading = async () => {
+    loadingContext.done()
+  }
   useEffect(() => {
     loading()
   }, [])
@@ -79,7 +83,7 @@ const LoginPage = props => {
               </Form.Item>
             </Col>
             <Col span={12}>
-              <Form.Item name={'Remember'} label={''} valuePropName="checked">
+              <Form.Item name={'Remember'} label={''} valuePropName='checked'>
                 <Checkbox>
                   Remember me
                 </Checkbox>

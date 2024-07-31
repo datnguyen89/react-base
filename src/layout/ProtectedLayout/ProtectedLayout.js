@@ -75,7 +75,6 @@ const ProtectedLayout = () => {
       default:
         return 32
     }
-
   }
 
   useEffect(() => {

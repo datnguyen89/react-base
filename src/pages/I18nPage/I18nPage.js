@@ -103,9 +103,9 @@ const I18nPage = props => {
       <br />
       <br />
       <br />
-      <div>api url{process.env.REACT_APP_API_URL}</div>
-      <div>env {config.env}</div>
-      <div>apiUrl {config.apiUrl}</div>
+      <div>env REACT_APP_API_URL: {process.env.REACT_APP_API_URL}</div>
+      <div>env: {config.env}</div>
+      <div>config.apiUrl: {config.apiUrl}</div>
       <br />
       <br />
       <Button onClick={handleClearToken}>Clear Token</Button>

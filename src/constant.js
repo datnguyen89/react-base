@@ -5,6 +5,12 @@ export const MAIN_SIDEBAR_DRAWER_WIDTH = 256
 export const MAIN_HEADER_HEIGHT = 64
 export const APP_NAME = 'validus'
 export const LONG_DATE = 'DD-MM-YYYY HH:mm'
+export const REQUEST_BUILDER = {
+  POST: 'POST',
+  GET: 'GET',
+  PUT: 'PUT',
+  DELETE: 'DELETE',
+}
 export const PAGES = {
   LOGIN: {
     PATH: '/login',
@@ -14,7 +20,6 @@ export const PAGES = {
     PATH: '/i18n',
     NAME: 'i18n',
   },
-
   ABOUT_US: {
     PATH: '/about-us',
     NAME: 'about-us',
@@ -37,11 +42,6 @@ export const RESPONSE_CODE = {
   SUCCESS: 1, // Thành công
 }
 
-export const THEME = {
-  PRIMARY_COLOR: '#00B74F',
-  COMPONENT_COLOR: '#00B74F',
-  BORDER_RADIUS: 4,
-}
 export const BREAKPOINT = {
   XS: 'XS', // width < 576
   SM: 'SM', // 576 <= width < 768

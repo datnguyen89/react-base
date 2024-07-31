@@ -1,8 +1,7 @@
 import styled from 'styled-components'
-import { THEME } from '../../constant'
 
 export const OtpFormWrapper = styled.div`
-  background-color: rgb(255, 255, 255);
+  background-color: ${props => props.backgroundColor};
   padding: 24px;
   border-radius: 8px;
   border: 1px solid #e1e1e1;
@@ -41,7 +40,7 @@ export const OtpTitle = styled.div`
   text-align: center;
   font-weight: 600;
   font-size: 32px;
-  color: ${THEME.PRIMARY_COLOR};
+  color: ${props => props.color};
   margin-bottom: 16px;
   @media only screen and (max-width: 768px) {
     font-size: 24px;

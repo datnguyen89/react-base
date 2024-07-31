@@ -39,3 +39,13 @@ export const currentPageState = atom({
   key: 'currentPageState',
   default: null,
 })
+export const themeState = atom({
+  key: 'themeState',
+  default: {
+    PRIMARY_COLOR: '#00B74F',
+    BORDER_RADIUS: 4,
+  },
+  effects: [
+    localStorageEffect('themeState'),
+  ],
+})
