@@ -1,7 +1,5 @@
-import React, { useContext, useEffect } from 'react'
+import React from 'react'
 import { FormLoginWrapper, LoginPageWrapper, RegisterWrapper } from './LoginPageStyled'
-import { LoadingContext } from 'react-router-loading'
-import IMAGES from '../../images'
 import { Button, Checkbox, Col, Form, Input, Row, theme } from 'antd'
 import { Link, useNavigate } from 'react-router-dom'
 import { PAGES } from '../../constant'
@@ -40,15 +38,6 @@ const LoginPage = props => {
   // endregion
   // region side effect ========================
 
-  // endregion
-  // region loading
-  const loadingContext = useContext(LoadingContext)
-  const loading = async () => {
-    loadingContext.done()
-  }
-  useEffect(() => {
-    loading()
-  }, [])
   // endregion
   return (
     <LoginPageWrapper>

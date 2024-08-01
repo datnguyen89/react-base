@@ -1,6 +1,5 @@
-import React, { useContext, useEffect } from 'react'
+import React from 'react'
 import { I18nPageWrapper } from './I18nPageStyled'
-import { LoadingContext } from 'react-router-loading'
 import { Button, DatePicker, Typography } from 'antd'
 import { useTranslation } from 'react-i18next'
 import config from '../../config'
@@ -25,13 +24,6 @@ const I18nPage = props => {
   const handleClearToken = () => {
     resetToken()
   }
-  const loadingContext = useContext(LoadingContext)
-  const loading = async () => {
-    loadingContext.done()
-  }
-  useEffect(() => {
-    loading()
-  }, [])
 
   // endregion
   // region function render ====================

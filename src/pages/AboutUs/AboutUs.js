@@ -1,18 +1,7 @@
-import React, { useContext, useEffect } from 'react'
-import PropTypes from 'prop-types'
+import React from 'react'
 import { AboutUsWrapper } from './AboutUsStyled'
-import { LoadingContext } from 'react-router-loading'
 
 const AboutUs = props => {
-
-  const loadingContext = useContext(LoadingContext)
-  const loading = async () => {
-    loadingContext.done()
-  }
-  useEffect(() => {
-    loading()
-  }, [])
-
   return (
     <AboutUsWrapper>
       AboutUs!!

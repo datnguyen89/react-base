@@ -1,24 +1,17 @@
-import React, { useContext, useEffect } from 'react'
+import React from 'react'
 import { HomePageWrapper } from './HomePageStyled'
-import { LoadingContext } from 'react-router-loading'
 import { Typography } from 'antd'
 import MainBanner from '../../components/MainBanner'
+import { Helmet } from 'react-helmet'
 
 const { Text } = Typography
 
 const HomePage = props => {
-  // region loading
-  const loadingContext = useContext(LoadingContext)
-  const loading = async () => {
-    loadingContext.done()
-  }
-  useEffect(() => {
-    loading()
-  }, [])
-  // endregion
-
   return (
     <HomePageWrapper>
+      <Helmet>
+        <title>Home</title>
+      </Helmet>
       <MainBanner />
     </HomePageWrapper>
   )

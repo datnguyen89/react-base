@@ -1,10 +1,8 @@
-import React, { useContext, useEffect, useState } from 'react'
-import PropTypes from 'prop-types'
-import { FormItemWrapper, TestPageWrapper } from './TestPageStyled'
-import { LoadingContext } from 'react-router-loading'
+import React, { useEffect, useRef, useState } from 'react'
+import { TestPageWrapper } from './TestPageStyled'
 import { Button, Col, ColorPicker, ConfigProvider, DatePicker, Drawer, Form, Input, Row, theme, Typography } from 'antd'
 import OtpForm from '../../components/OtpForm'
-import { useRecoilState, useRecoilValue, useResetRecoilState } from 'recoil'
+import { useRecoilState, useResetRecoilState } from 'recoil'
 import { themeState } from '../../recoil/commonState'
 import { useTranslation } from 'react-i18next'
 
@@ -13,24 +11,21 @@ const TestPage = props => {
     token: { colorBgContainer },
   } = theme.useToken()
   const { t } = useTranslation()
-
-  const loadingContext = useContext(LoadingContext)
   const [THEME, SET_THEME] = useRecoilState(themeState)
   const resetTheme = useResetRecoilState(themeState)
-  const loading = async () => {
-    loadingContext.done()
-  }
+
+  const elementRef = useRef(null)
+  const [height, setHeight] = useState(0)
   useEffect(() => {
-    loading()
+    if (elementRef.current) {
+      setHeight(elementRef.current.offsetHeight)
+    }
   }, [])
+
   const handleFinish = (e) => {
     console.log(e)
     console.log(e.BirthDate.format('YYYY-MM-DD'))
   }
-  // useEffect(() => {
-  //   console.log(values)
-  // },  [values])
-
 
   const [open, setOpen] = useState(false)
   const showDrawer = () => {
@@ -115,6 +110,15 @@ const TestPage = props => {
         }} />
       <ColorPicker value={THEME.PRIMARY_COLOR} onChange={handleChangeTheme} />
       <br />
+      <div ref={elementRef} style={{background: '#ccc'}}>
+        <br />
+        123
+        <br />
+        <br />
+        <br />
+      </div>
+      <br />
+      <div>Height: {height}</div>
       <br />
       <Button onClick={handleResetTheme}>Default Theme</Button>
     </TestPageWrapper>

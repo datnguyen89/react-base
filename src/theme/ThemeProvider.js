@@ -12,9 +12,11 @@ import { ThemeProviderWrapper } from './ThemeProviderStyled'
 import { useTranslation } from 'react-i18next'
 import { useMediaQuery } from 'react-responsive'
 import '../i18n/i18n'
-import { topbar } from 'react-router-loading'
 import 'moment/locale/vi'
 import 'moment/locale/en-nz'
+import { useLocation } from 'react-router-dom'
+import nprogress from 'nprogress'
+import { startProgress, stopProgress } from '../commonFunction'
 
 const { useBreakpoint } = Grid
 notification.config({
@@ -71,17 +73,17 @@ const ThemeProvider = props => {
     setBreakPointState(BREAKPOINT.XXL)
   }, [isXXL])
 
-  topbar.config({
-    autoRun: true,
-    barThickness: 2,
-    barColors: {
-      0: isDarkMode ? '#fa8c16' : THEME.PRIMARY_COLOR,
-      .3: isDarkMode ? '#fa8c16' : THEME.PRIMARY_COLOR,
-      1.0: isDarkMode ? '#fa8c16' : THEME.PRIMARY_COLOR,
-    },
-    shadowBlur: 2,
-    shadowColor: '#fff',
-  })
+  const location = useLocation()
+  useEffect(() => {
+    nprogress.configure({
+      showSpinner: false,
+      template: `<div class='bar' role='bar' style='background: ${THEME.PRIMARY_COLOR}'></div>`,
+    })
+    startProgress()
+    stopProgress()
+    return () => {
+    }
+  }, [location])
 
   return (
     <ConfigProvider
@@ -104,7 +106,9 @@ const ThemeProvider = props => {
         },
       }}
     >
-      <ThemeProviderWrapper isDarkMode={isDarkMode}>
+      <ThemeProviderWrapper
+        primaryColor={THEME.PRIMARY_COLOR}
+        isDarkMode={isDarkMode}>
         {children}
       </ThemeProviderWrapper>
     </ConfigProvider>
