@@ -29,7 +29,7 @@ notification.config({
 const ThemeProvider = props => {
   const { children } = props
   const screens = useBreakpoint()
-  const { defaultAlgorithm, darkAlgorithm } = theme
+  const { defaultAlgorithm, darkAlgorithm, compactAlgorithm } = theme
   const isDarkMode = useRecoilValue(isDarkModeState)
   const language = useRecoilValue(languageState)
   const setBreakPointState = useSetRecoilState(breakPointState)
@@ -89,7 +89,7 @@ const ThemeProvider = props => {
     <ConfigProvider
       locale={language === 'vi' ? viVN : enUS}
       theme={{
-        algorithm: isDarkMode ? darkAlgorithm : defaultAlgorithm,
+        algorithm: isDarkMode ? [darkAlgorithm, compactAlgorithm] : [defaultAlgorithm, compactAlgorithm],
         token: {
           colorPrimary: THEME.PRIMARY_COLOR,
           borderRadius: THEME.BORDER_RADIUS,
