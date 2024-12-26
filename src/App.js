@@ -14,7 +14,6 @@ import HomePage from './pages/HomePage'
 import NotFoundPage from './pages/NotFoundPage'
 import ThemeProvider from './theme/ThemeProvider'
 import AboutUs from './pages/AboutUs'
-import TestPage from './pages/TestPage'
 import PublicLayout from './layout/PublicLayout'
 import I18nPage from './pages/I18nPage'
 import { Route, Routes } from 'react-router-dom'
@@ -31,7 +30,6 @@ function App() {
             <Route path={PAGES.LOGIN.PATH} element={<LoginPage />} />
           </Route>
           <Route element={<ProtectedLayout />}>
-            <Route path={PAGES.TEST.PATH} element={<TestPage />} />
             <Route path={PAGES.ABOUT_US.PATH} element={<AboutUs />} />
             <Route path={PAGES.I18N.PATH} element={<I18nPage />} />
           </Route>

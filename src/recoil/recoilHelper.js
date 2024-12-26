@@ -1,7 +1,7 @@
 
 export const localStorageEffect = key => ({ setSelf, onSet }) => {
   const savedValue = localStorage.getItem(key)
-  if (savedValue != null) {
+  if (savedValue !== null && savedValue !== undefined && savedValue !== '') {
     setSelf(JSON.parse(decodeURI(atob(savedValue))))
   }
 

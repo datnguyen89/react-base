@@ -1,117 +1,160 @@
-import axios from 'axios'
-import config from '../config'
-import history from '../customRouter/history'
-import { notification } from 'antd'
-import queryString from 'query-string'
-import { getRecoil, setRecoil } from 'recoil-nexus'
-import { appLoadingState } from '../recoil/commonState'
-import { PAGES, RESPONSE_CODE } from '../constant'
-import { accessTokenState } from '../recoil/authenticationState'
+import axios from 'axios';
+import config from '../config';
+import history from '../customRouter/history';
+import { notification } from 'antd';
+import queryString from 'query-string';
+import { getRecoil, setRecoil } from 'recoil-nexus';
+import { appLoadingState } from '../recoil/commonState';
+import { PAGES, RESPONSE_CODE } from '../constant';
+import { accessTokenState } from '../recoil/authenticationState';
 
+// Utility functions
+const handleLoading = (config, delta) => {
+  if (!config?.disabledLoading) {
+    setRecoil(appLoadingState, (appLoading) => Math.max(appLoading + delta, 0));
+  }
+};
 
+const handleError = (error) => {
+  const { response } = error;
+
+  if (!response?.config?.disableAutoError) {
+    notification.error({
+      message: 'Thông báo',
+      description: response?.data?.message || error.message,
+    });
+  }
+};
+
+// Refresh token logic
+let isRefreshing = false;
+let failedQueue = [];
+
+const processQueue = (error, token = null) => {
+  failedQueue.forEach((prom) => {
+    token ? prom.resolve(token) : prom.reject(error);
+  });
+  failedQueue = [];
+};
+
+const refreshToken = async () => {
+  try {
+    const response = await axios.post(`${config.apiUrl}/refresh-token`, {
+      token: getRecoil(accessTokenState),
+    });
+    const newToken = response.data?.accessToken;
+    setRecoil(accessTokenState, newToken);
+    return newToken;
+  } catch (error) {
+    processQueue(error);
+    throw error;
+  }
+};
+
+// Create axios instance
 const axiosClient = axios.create({
-  baseURL: config.apiUrl,
   headers: {
     'content-type': 'application/json',
   },
   paramsSerializer: {
-    serialize: params => queryString.stringify(params),
+    serialize: (params) => queryString.stringify(params),
   },
-})
+});
+
+// Request interceptor
 axiosClient.interceptors.request.use(
-  request => {
-    // region Authentication
+  (request) => {
     const accessToken = getRecoil(accessTokenState);
     if (accessToken) {
       request.headers.Authorization = `Bearer ${accessToken}`;
     }
-    // endregion
-    // region Headers
+
     if (request?.customHeaders) {
-      request.headers = {
-        ...request.headers,
-        ...request.customHeaders
-      }
+      request.headers = { ...request.headers, ...request.customHeaders };
     }
-    // endregion
-    // region Loading
-    if (!request?.disabledLoading) {
-      setRecoil(appLoadingState, (appLoading) => appLoading + 1)
-    }
-    // endregion
-    return request
+
+    handleLoading(request, 1);
+    return request;
   },
-  error => {
-    // region Loading
-    if (!error.config?.disabledLoading) {
-      setRecoil(appLoadingState, (appLoading) => appLoading - 1)
+  (error) => {
+    handleLoading(error.config, -1);
+    return Promise.reject(error);
+  }
+);
+
+// Response interceptor
+const handleUnauthorized = (response) => {
+  const originalRequest = response.config;
+  if (originalRequest?.refreshToken) {
+    if (!isRefreshing) {
+      isRefreshing = true;
+      refreshToken()
+        .then((newToken) => {
+          processQueue(null, newToken);
+          isRefreshing = false;
+        })
+        .catch((error) => {
+          processQueue(error);
+          isRefreshing = false;
+          notification.error({
+            message: 'Thông báo',
+            description: 'Phiên làm việc hết hạn',
+          });
+          history.push(PAGES.LOGIN.PATH);
+        });
     }
-    // endregion
-    return Promise.reject(error)
-  },
-)
+
+    return new Promise((resolve, reject) => {
+      failedQueue.push({
+        resolve: (token) => {
+          originalRequest.headers.Authorization = `Bearer ${token}`;
+          resolve(axiosClient(originalRequest));
+        },
+        reject: (err) => reject(err),
+      });
+    });
+  } else {
+    notification.error({
+      message: 'Thông báo',
+      description: 'Phiên làm việc hết hạn',
+    });
+    history.push(PAGES.LOGIN.PATH);
+  }
+};
 
 axiosClient.interceptors.response.use(
   (response) => {
-    // region Loading
-    if (!response.config?.disabledLoading) {
-      setRecoil(appLoadingState, (appLoading) => appLoading - 1)
-    }
-    // endregion
+    handleLoading(response.config, -1);
+    const { statusCode, message } = response?.data || {};
 
-    switch (response?.data?.statusCode) {
-      case RESPONSE_CODE.SUCCESS: // thành công
-        break
-      case RESPONSE_CODE.UN_AUTHORIZE: // Hết phiên
-        notification.error({
-          message: 'Thông báo',
-          description: 'Phiên làm việc hết hạn',
-        })
-        break
+    switch (statusCode) {
+      case RESPONSE_CODE.SUCCESS:
+        break;
+      case RESPONSE_CODE.UN_AUTHORIZE:
+        return handleUnauthorized(response);
       default:
         if (!response.config?.disableAutoError) {
           notification.error({
             message: 'Thông báo',
-            description: response?.data?.message || 'Có lỗi xảy ra',
-          })
+            description: message || 'Có lỗi xảy ra',
+          });
         }
-        break
+        break;
     }
 
-    if (response && response?.data) {
-      return response.data
-    }
-    return response
+    return response.data || response;
   },
   (error) => {
-    const originalRequest = error.config
-    // region Loading
-    if (!originalRequest?.disabledLoading) {
-      setRecoil(appLoadingState, (appLoading) => appLoading - 1)
-    }
-    // endregion
-    if (error instanceof axios.Cancel) {
+    const originalRequest = error.config;
+    handleLoading(originalRequest, -1);
 
-    } else {
-      switch (error?.response?.status) {
-        case 401:
-          // console.log(error)
-          notification.error({
-            message: 'Thông báo',
-            description: error?.response?.data?.message || 'Phiên làm việc hết hạn',
-          })
-          break
-        default:
-          if (!originalRequest?.disableAutoError) {
-            notification.error({
-              message: 'Thông báo',
-              description: error?.response?.data?.message || error?.message,
-            })
-          }
-          break
-      }
+    if (error.response?.status === RESPONSE_CODE.UN_AUTHORIZE && originalRequest?.refreshToken) {
+      return handleUnauthorized(error.response);
     }
-    return Promise.reject(error)
-  })
 
-export default axiosClient
+    handleError(error);
+    return Promise.reject(error);
+  }
+);
+
+export default axiosClient;

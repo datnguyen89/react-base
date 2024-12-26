@@ -40,6 +40,7 @@ export const PAGES = {
 
 export const RESPONSE_CODE = {
   SUCCESS: 1, // Thành công
+  UN_AUTHORIZE: 401
 }
 
 export const BREAKPOINT = {

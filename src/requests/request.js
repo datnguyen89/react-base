@@ -2,50 +2,35 @@ import axiosClient from './axiosClient'
 import { REQUEST_BUILDER } from '../constant'
 import config from '../config'
 
-const request = {
-  get: ({ url, baseUrl, params, disabledLoading, disableAutoError }) => {
-    return axiosClient({
-      baseURL: baseUrl || config.apiUrl,
-      url: url,
-      method: REQUEST_BUILDER.GET,
-      ...(params && { params: params }),
-      disabledLoading: disabledLoading,
-      disableAutoError: disableAutoError,
-      customHeaders: { 'x-request-id': 'xxx' },
-    })
-  },
-  post: ({ url, baseUrl, data, disabledLoading, disableAutoError }) => {
-    return axiosClient({
-      baseURL: baseUrl || config.apiUrl,
-      url: url,
-      method: REQUEST_BUILDER.POST,
-      ...(data && { data: data }),
-      disabledLoading: disabledLoading,
-      disableAutoError: disableAutoError,
-      customHeaders: { 'x-request-id': 'xxx' },
-    })
-  },
-  delete: ({ url, baseUrl, data, disabledLoading, disableAutoError }) => {
-    return axiosClient({
-      baseURL: baseUrl || config.apiUrl,
-      url: url,
-      method: REQUEST_BUILDER.DELETE,
-      ...(data && { data: data }),
-      disabledLoading: disabledLoading,
-      disableAutoError: disableAutoError,
-      customHeaders: { 'x-request-id': 'xxx' },
-    })
-  },
-  put: ({ url, baseUrl, data, disabledLoading, disableAutoError }) => {
-    return axiosClient({
-      baseURL: baseUrl || config.apiUrl,
-      url: url,
-      method: REQUEST_BUILDER.PUT,
-      ...(data && { data: data }),
-      disabledLoading: disabledLoading,
-      disableAutoError: disableAutoError,
-      customHeaders: { 'x-request-id': 'xxx' },
-    })
-  },
-}
-export default request
+const request = (method) => ({
+                               url,
+                               baseUrl = config.apiUrl,  // Sử dụng mặc định nếu không có baseUrl
+                               data,
+                               params,
+                               disabledLoading = false,
+                               disableAutoError = false,  // Mặc định là không tắt xử lý lỗi tự động
+                               customHeaders = {},
+                             }) => {
+  const options = {
+    baseURL: baseUrl,
+    url,
+    method,
+    ...(data && { data }),
+    ...(params && { params }),
+    disabledLoading,
+    disableAutoError,
+    customHeaders: {
+      'x-request-id': 'xxx',    // Giá trị mặc định cho request id
+      ...customHeaders,         // Ghép thêm các header tùy chỉnh từ bên ngoài
+    },
+  };
+
+  return axiosClient(options);
+};
+
+export default {
+  get: request(REQUEST_BUILDER.GET),
+  post: request(REQUEST_BUILDER.POST),
+  delete: request(REQUEST_BUILDER.DELETE),
+  put: request(REQUEST_BUILDER.PUT),
+};
