@@ -17,11 +17,11 @@ import AboutUs from './pages/AboutUs'
 import PublicLayout from './layout/PublicLayout'
 import I18nPage from './pages/I18nPage'
 import { Route, Routes } from 'react-router-dom'
+import ComponentsPage from './pages/ComponentsPage'
 
 // endregion
 
 function App() {
-
   return (
     <CustomRouter history={history}>
       <ThemeProvider>
@@ -32,11 +32,12 @@ function App() {
           <Route element={<ProtectedLayout />}>
             <Route path={PAGES.ABOUT_US.PATH} element={<AboutUs />} />
             <Route path={PAGES.I18N.PATH} element={<I18nPage />} />
+            <Route path={PAGES.COMPONENTS.PATH} element={<ComponentsPage />} />
           </Route>
           <Route element={<PublicLayout />}>
             <Route path={PAGES.HOME.PATH} element={<HomePage />} />
           </Route>
-          <Route path='*' element={<NotFoundPage />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
         <LoadingOverLay />
       </ThemeProvider>

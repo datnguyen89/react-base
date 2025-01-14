@@ -24,9 +24,9 @@ export const PAGES = {
     PATH: '/about-us',
     NAME: 'about-us',
   },
-  TEST: {
-    PATH: '/test',
-    NAME: 'test',
+  COMPONENTS: {
+    PATH: '/components',
+    NAME: 'components',
   },
   HOME: {
     PATH: '/',
@@ -40,7 +40,7 @@ export const PAGES = {
 
 export const RESPONSE_CODE = {
   SUCCESS: 1, // Thành công
-  UN_AUTHORIZE: 401
+  UN_AUTHORIZE: 401,
 }
 
 export const BREAKPOINT = {

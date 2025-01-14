@@ -6,7 +6,12 @@ import 'dayjs/locale/vi'
 import 'dayjs/locale/en'
 import { ConfigProvider, Grid, notification, theme } from 'antd'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
-import { breakPointState, isDarkModeState, languageState, themeState } from '../recoil/commonState'
+import {
+  breakPointState,
+  isDarkModeState,
+  languageState,
+  themeState,
+} from '../recoil/commonState'
 import { BREAKPOINT } from '../constant'
 import { ThemeProviderWrapper } from './ThemeProviderStyled'
 import { useTranslation } from 'react-i18next'
@@ -81,15 +86,19 @@ const ThemeProvider = props => {
     })
     startProgress()
     stopProgress()
-    return () => {
-    }
+    return () => {}
   }, [location])
 
   return (
     <ConfigProvider
       locale={language === 'vi' ? viVN : enUS}
       theme={{
-        algorithm: isDarkMode ? [darkAlgorithm, compactAlgorithm] : [defaultAlgorithm, compactAlgorithm],
+        algorithm: isDarkMode
+          ? [darkAlgorithm, defaultAlgorithm]
+          : [defaultAlgorithm, defaultAlgorithm],
+        // algorithm: isDarkMode
+        //   ? [darkAlgorithm, compactAlgorithm]
+        //   : [defaultAlgorithm, compactAlgorithm],
         token: {
           colorPrimary: THEME.PRIMARY_COLOR,
           borderRadius: THEME.BORDER_RADIUS,
@@ -104,8 +113,7 @@ const ThemeProvider = props => {
             headerColor: '#fff',
           },
         },
-      }}
-    >
+      }}>
       <ThemeProviderWrapper
         primaryColor={THEME.PRIMARY_COLOR}
         isDarkMode={isDarkMode}>

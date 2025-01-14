@@ -1,15 +1,16 @@
 import React from 'react'
-import { I18nPageWrapper } from './I18nPageStyled'
-import { Button, DatePicker, Typography } from 'antd'
+import { ComponentsPageWrapper } from './ComponentsPageStyled'
+import { Button, DatePicker, Form, Input, Typography } from 'antd'
 import { useTranslation } from 'react-i18next'
 import config from '../../config'
 import { useResetRecoilState } from 'recoil'
 import { accessTokenState } from '../../recoil/authenticationState'
 import moment from 'moment'
+import InputMu from '../../components/InputMu/InputMu'
 
 const { Text } = Typography
 
-const I18nPage = props => {
+const ComponentsPage = props => {
   // region props, hook, state =================
   const { t } = useTranslation()
   const resetToken = useResetRecoilState(accessTokenState)
@@ -34,26 +35,23 @@ const I18nPage = props => {
   // endregion
 
   return (
-    <I18nPageWrapper>
-      <Text>
-        <span>{t('i0001')}</span>
-        <br />
-        {moment().format('LL')}
-        <br />
-        {moment().startOf('hour').fromNow()}
-      </Text>
-
-      <div>env REACT_APP_API_URL: {process.env.REACT_APP_API_URL}</div>
-      <div>env: {config.env}</div>
-      <div>config.apiUrl: {config.apiUrl}</div>
+    <ComponentsPageWrapper>
+      <Typography.Text>Input MU</Typography.Text>
       <br />
       <br />
-      <Button onClick={handleClearToken}>Clear Token</Button>
-      <DatePicker />
-    </I18nPageWrapper>
+      <br />
+      <Form>
+        <Form.Item>
+          <InputMu label="Your Label" />
+        </Form.Item>
+        <Form.Item>
+          <Input label="Your Label" placeholder="Enter your text" />
+        </Form.Item>
+      </Form>
+    </ComponentsPageWrapper>
   )
 }
 
-I18nPage.propTypes = {}
+ComponentsPage.propTypes = {}
 
-export default I18nPage
+export default ComponentsPage
