@@ -22,6 +22,7 @@ import 'moment/locale/en-nz'
 import { useLocation } from 'react-router-dom'
 import nprogress from 'nprogress'
 import { startProgress, stopProgress } from '../commonFunction'
+import { getClientInfo } from '../utils/deviceUtils'
 
 const { useBreakpoint } = Grid
 notification.config({
@@ -88,6 +89,12 @@ const ThemeProvider = props => {
     stopProgress()
     return () => {}
   }, [location])
+
+  useEffect(() => {
+    getClientInfo().then(res => {
+      console.log(res)
+    })
+  }, [])
 
   return (
     <ConfigProvider
